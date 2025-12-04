@@ -1,0 +1,87 @@
+**ACT AS:** Senior Frontend Architect & UI/UX Engineer.
+**PROJECT:** "Bari.Trekking" - A community trekking platform (Landing Page + Registration Flow).
+**CONTEXT:** We are building a high-performance, aesthetically pleasing SPA for an outdoor community in Patagonia. The user is a Semi-Senior dev, so code must be clean, modular, and strictly typed.
+
+---
+
+### 1. TECH STACK (STRICT)
+- **Core:** React 18.2+, TypeScript, Vite 5.4+ (Scaffold with `npm create vite@latest`).
+- **Styling:** TailwindCSS 3.4+ (Mobile-first, Custom Theme).
+- **Animation:** Framer Motion (for micro-interactions and smooth reveals).
+- **Forms:** React Hook Form + Zod (Schema validation).
+- **Routing:** React Router DOM v6+.
+- **Icons:** Lucide React.
+- **Performance:** Lighthouse-first approach (Lazy loading, semantic HTML, accessible contrast).
+
+---
+
+### 2. FILE STRUCTURE (Modular Architecture)
+Follow this exact structure based on "Estudio CILS" standards:
+src/ ├── components/ │ ├── ui/ # Primitives (Button, Card, Input, Accordion) │ ├── layout/ # Navbar, Footer, Container │ └── sections/ # Hero, Pricing, LegalRegistration, FAQ ├── hooks/ # useScroll, useFormLogic ├── lib/ # utils.ts (clsx/tailwind-merge), schemas.ts (Zod) ├── styles/ # index.css (Tailwind directives) └── App.tsx # Main composition
+
+
+---
+
+### 3. DESIGN SYSTEM: "ANDINO DIGITAL"
+Configure `tailwind.config.js` with these exact tokens:
+
+**Colors:**
+- `bari-teal`: `#378e88` (Primary/Brand - Safety & Nature)
+- `bari-orange`: `#fd8d4e` (Secondary/CTA - Energy)
+- `bari-gold`: `#f5a941` (Accent - Premium/Stars)
+- `bari-dark`: `#25424c` (Surface/Text - Deep Blue, replace pure black)
+- `bari-cream`: `#f8fafc` (Background - Clean air)
+
+**Typography:**
+- Headings: 'Montserrat', sans-serif (Bold/SemiBold, Uppercase for sections).
+- Body: 'Inter', sans-serif (High legibility for legal text).
+
+**UI Rules:**
+- **Cards:** `bg-white rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`.
+- **Buttons:** Pill-shaped (`rounded-full`). Primary uses `bari-teal`, CTA uses `bari-orange`.
+- **Glassmorphism:** Use `backdrop-blur-md bg-white/80` for the Sticky Navbar.
+
+---
+
+### 4. CORE FEATURES TO IMPLEMENT
+
+#### A. Hero Section
+- Full viewport height (`min-h-screen`).
+- Background image (placeholder mountain URL) with a gradient overlay (`from-bari-dark/80` to transparent).
+- **Content:** Title "COMPARTIENDO SENDEROS", Subtitle about autonomy, and two buttons ("Unirme" & "Protocolo").
+- **Animation:** Fade-in text using Framer Motion.
+
+#### B. Pricing Section (The "Plans")
+- Grid layout with 3 cards:
+  1. **Sendero (Free):** Minimalist, gray border.
+  2. **Comunidad (Best Seller):** Scaled up (`scale-105`), `border-bari-teal`, shadow color `bari-teal/20`. Badge: "Más Popular".
+  3. **Cumbre (Premium):** Gold accents.
+- **Data:** Use the plans provided (Trekking groups vs Social groups).
+
+#### C. Registration & Legal Flow (Critical UX)
+- **Layout:** Split screen (Desktop: 2 cols, Mobile: Stacked).
+- **Left Col (Legal):**
+  - A component displaying the Terms & Conditions.
+  - **Requirement:** Must be a scrollable container (`max-h-[400px] overflow-y-auto`).
+  - **Content:** Summarize the provided "Términos y Condiciones" (Autonomy, Risk Assumption, No Guide Service).
+- **Right Col (Form):**
+  - Fields: Name, Last Name, Email.
+  - **Validation:** Use Zod. Email must be valid.
+  - **The "Handshake":** A Checkbox that is *only* clickable if the user has interacted with the legal text (or just ensure it validates "I accept T&C and declare physical fitness").
+  - **Submit:** Button text "Ir al Pago" (Mockup function).
+
+#### D. FAQ Section
+- Simple Accordion component using Framer Motion for `AnimatePresence` (expand/collapse).
+
+---
+
+### 5. EXECUTION INSTRUCTIONS
+1.  Initialize the project and `tailwind.config.js` first.
+2.  Create the `Button` and `Card` primitives in `components/ui`.
+3.  Build the sections ensuring responsive design (stack on mobile, grid on desktop).
+4.  Implement the Zod schema for the registration form.
+5.  Ensure accessibility (ARIA labels on inputs).
+
+**GOAL:** Generate the code for the main `App.tsx`, the `tailwind.config.js`, and the `Registration` component log
+
+
