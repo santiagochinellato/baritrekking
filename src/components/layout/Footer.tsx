@@ -123,7 +123,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-bari-dark text-white py-12 border-t border-white/10">
+    <footer
+      id="footer"
+      className="bg-bari-dark text-white pt-16 pb-8 border-t border-white/10"
+    >
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4 flex flex-col items-center">
