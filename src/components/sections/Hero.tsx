@@ -41,7 +41,7 @@ const Hero = () => {
     if (!heroData?.title) {
       return (
         <>
-          <span className="text-bari-orange">CONECTAR</span>
+          <span className="text-bari-orange drop-shadow-lg">CONECTAR</span>
           <br />
           COMPARTIR
           <br />
@@ -53,7 +53,7 @@ const Hero = () => {
     const words = heroData.title.split(" ");
     return (
       <>
-        <span className="text-bari-orange">{words[0]}</span>
+        <span className="text-bari-orange drop-shadow-lg">{words[0]}</span>
         {words.length > 1 && " " + words.slice(1).join(" ")}
       </>
     );
