@@ -105,7 +105,7 @@ const Hero = () => {
             {renderTitle()}
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
+          <p className=" drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
             {subtitle}
           </p>
         </motion.div>
