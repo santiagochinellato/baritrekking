@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "../ui/Button";
 import { Container } from "../layout/Container";
-import { ChevronDown } from "lucide-react";
 import { useSanity } from "../../hooks/useSanity";
 import { urlFor } from "../../lib/sanity";
 
@@ -9,17 +7,23 @@ interface HeroData {
   title: string;
   subtitle: string;
   backgroundImage: unknown;
-  ctaText: string;
+}
+
+interface NavbarData {
+  logo?: {
+    asset: {
+      _ref: string;
+    };
+  };
 }
 
 const Hero = () => {
   const { data: heroData } = useSanity<HeroData>(`*[_type == "hero"][0]`);
+  const { data: navbarData } = useSanity<NavbarData>(`*[_type == "navbar"][0]`);
 
-  const scrollToManifesto = () => {
-    document
-      .getElementById("manifesto")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
+  const logoSrc = navbarData?.logo
+    ? urlFor(navbarData.logo).url()
+    : "https://i.ibb.co/LfhB81V/btLogo.webp";
 
   // Default values while loading or if no data
   // const title = heroData?.title || "CONECTAR COMPARTIR SER COMUNIDAD";
@@ -29,7 +33,6 @@ const Hero = () => {
   const bgImage = heroData?.backgroundImage
     ? urlFor(heroData.backgroundImage).width(1920).url()
     : "public/realHero.webp";
-  const ctaText = heroData?.ctaText || "Explorá la Comunidad";
 
   // Function to render title with line breaks if it contains them, or custom logic
   // For now, we'll assume the user enters the full string.
@@ -41,7 +44,9 @@ const Hero = () => {
     if (!heroData?.title) {
       return (
         <>
-          <span className="text-bari-orange drop-shadow-lg">CONECTAR</span>
+          <span className="text-bari-orange drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+            CONECTAR
+          </span>
           <br />
           COMPARTIR
           <br />
@@ -53,7 +58,9 @@ const Hero = () => {
     const words = heroData.title.split(" ");
     return (
       <>
-        <span className="text-bari-orange drop-shadow-lg">{words[0]}</span>
+        <span className="text-bari-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+          {words[0]}
+        </span>
         {words.length > 1 && " " + words.slice(1).join(" ")}
       </>
     );
@@ -71,7 +78,7 @@ const Hero = () => {
           alt="Comunidad Bari.Trekking"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bari-teal/50 via-bari-teal/20 to-bari-teal/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bari-teal/90 via-bari-teal/20 to-bari-teal/50" />
       </div>
 
       <Container className="relative z-10 text-center px-4">
@@ -81,24 +88,26 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="space-y-8 max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="flex justify-center mb-6"
+          >
+            <img
+              src={logoSrc}
+              alt="Bari Trekking Logo"
+              className="w-40 md:w-40 lg:w-56 drop-shadow-2xl"
+            />
+          </motion.div>
+
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight">
             {renderTitle()}
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
             {subtitle}
           </p>
-
-          <div className="pt-8">
-            <Button
-              onClick={scrollToManifesto}
-              size="lg"
-              className="bg-white/10 backdrop-blur-md border border-white/30 text-white hover:bg-white/20 text-lg px-8 py-6 rounded-full transition-all duration-300 group"
-            >
-              {ctaText}
-              <ChevronDown className="ml-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
-            </Button>
-          </div>
         </motion.div>
       </Container>
     </section>

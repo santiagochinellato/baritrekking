@@ -76,24 +76,30 @@ const Navbar = () => {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#"
-            className="flex items-center gap-2 group transition-all duration-300"
+        <nav
+          className={cn(
+            "flex items-center transition-all duration-500",
+            isScrolled ? "justify-between" : "justify-center"
+          )}
+        >
+          {/* Logo - Animate presence */}
+          <div
+            className={cn(
+              "transition-all duration-500 overflow-hidden",
+              isScrolled ? "w-auto opacity-100 mr-auto" : "w-0 opacity-0"
+            )}
           >
-            <motion.img
-              src={logoSrc}
-              alt="Bari.Trekking Logo"
-              className={cn(
-                "transition-all duration-300",
-                isScrolled
-                  ? "w-12 sm:w-14 md:w-16 lg:w-20"
-                  : "w-14 sm:w-16 md:w-20 lg:w-24"
-              )}
-              whileHover={{ scale: 1.05 }}
-            />
-          </a>
+            <a href="#" className="flex items-center gap-2 group">
+              <img
+                src={logoSrc}
+                alt="Bari.Trekking Logo"
+                className={cn(
+                  "transition-all duration-300",
+                  isScrolled ? "w-12 sm:w-14 md:w-16 lg:w-20" : "w-0"
+                )}
+              />
+            </a>
+          </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
@@ -125,7 +131,10 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden z-50 p-2"
+            className={cn(
+              "md:hidden z-50 p-2 absolute right-4",
+              !isScrolled && "top-4"
+            )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
