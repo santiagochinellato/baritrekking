@@ -1,8 +1,8 @@
 import { Container } from "../layout/Container";
-import { Heart, Users, ShieldCheck, Mountain } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "../ui/Button";
 import { useSanity } from "../../hooks/useSanity";
+import { ManifestoValues } from "./manifesto/ManifestoValues";
+import { RequirementsList } from "./manifesto/RequirementsList";
 
 interface ValueItem {
   title: string;
@@ -18,59 +18,14 @@ interface ManifestoData {
   requirementsTitle: string;
   requirementsIntro: string;
   requirementsList: string[];
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 const Manifesto = () => {
   const { data: manifestoData } = useSanity<ManifestoData>(
     `*[_type == "manifesto"][0]`
   );
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  // Helper to get icon component
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case "Users":
-        return <Users size={40} />;
-      case "Heart":
-        return <Heart size={40} />;
-      case "Mountain":
-        return <Mountain size={40} />;
-      default:
-        return <Users size={40} />;
-    }
-  };
-
-  // Helper for icon colors
-  const getIconStyles = (iconName: string) => {
-    switch (iconName) {
-      case "Users":
-        return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
-      case "Heart":
-        return "bg-bari-orange/10 text-bari-orange group-hover:bg-bari-orange";
-      case "Mountain":
-        return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
-      default:
-        return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
-    }
-  };
 
   // Defaults
   const title = manifestoData?.title || "Volver a lo Simple";
@@ -146,88 +101,15 @@ const Manifesto = () => {
           </motion.p>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24"
-        >
-          {values.map((value, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="text-center space-y-4 group cursor-pointer"
-            >
-              <motion.div
-                className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center transition-all group-hover:text-white group-hover:shadow-lg ${getIconStyles(
-                  value.icon
-                )}`}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                {getIcon(value.icon)}
-              </motion.div>
-              <h3 className="text-xl font-bold text-bari-dark ">
-                {value.title}
-              </h3>
-              <p className="text-bari-slate">{value.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <ManifestoValues values={values} />
 
-        {/* Enhanced Requirements Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative bg-gradient-to-br from-bari-teal/5 via-white to-bari-orange/5 rounded-3xl p-8 md:p-12 border-2 border-bari-teal/20 shadow-xl"
-        >
-          {/* Badge */}
-          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(50%-4rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-            ⚠️ Requisitos Importantes
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-12 items-center mt-4">
-            <div className="flex-1 space-y-6">
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark text-center lg:text-left">
-                {reqTitle}
-              </h3>
-              <p className="text-bari-dark text-lg font-medium">{reqIntro}</p>
-            </div>
-            <div className="flex-1 w-full">
-              <ul className="space-y-4">
-                {reqList.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-3 group"
-                  >
-                    <ShieldCheck className="w-6 h-6 text-bari-teal flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                    <span className="text-bari-dark font-medium text-lg">
-                      {item}
-                    </span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* CTA inside requirements */}
-          <div className="mt-8 text-center">
-            <Button
-              className="bg-bari-teal hover:bg-bari-teal/90 text-white font-bold shadow-lg hover:shadow-xl transition-all"
-              size="lg"
-              onClick={() => (window.location.href = "#")}
-            >
-              ¿Cumplís los requisitos? Sumate Ahora
-            </Button>
-          </div>
-        </motion.div>
+        <RequirementsList
+          title={reqTitle}
+          intro={reqIntro}
+          list={reqList}
+          ctaText={manifestoData?.ctaText}
+          ctaLink={manifestoData?.ctaLink}
+        />
       </Container>
     </section>
   );

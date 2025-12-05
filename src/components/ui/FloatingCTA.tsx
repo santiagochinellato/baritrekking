@@ -2,9 +2,21 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { Button } from "./Button";
+import { useSanity } from "../../hooks/useSanity";
+
+interface NavbarData {
+  cta: {
+    text: string;
+    link: string;
+  };
+}
 
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { data: navbarData } = useSanity<NavbarData>(`*[_type == "navbar"][0]`);
+
+  const ctaText = navbarData?.cta?.text || "Unirme Ahora";
+  const ctaLink = navbarData?.cta?.link || "#";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +45,7 @@ const FloatingCTA = () => {
   }, []);
 
   const handleClick = () => {
-    window.location.href = "#"; // Replace with actual registration link
+    window.location.href = ctaLink;
   };
 
   return (
@@ -50,7 +62,7 @@ const FloatingCTA = () => {
             className="bg-bari-orange hover:bg-bari-orange/90 text-white rounded-full shadow-2xl px-6 py-3 flex items-center gap-2 group"
             size="lg"
           >
-            <span className="font-bold">Unirme Ahora</span>
+            <span className="font-bold">{ctaText}</span>
             <ArrowUp className="h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
           </Button>
         </motion.div>

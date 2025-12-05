@@ -1,69 +1,45 @@
 import { defineField, defineType } from 'sanity'
 
-export default defineType({
+export const manifesto = defineType({
   name: 'manifesto',
-  title: 'Manifesto Section',
+  title: 'Manifiesto',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Section Title',
-      type: 'string',
-      initialValue: 'Volver a lo Simple',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Main Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'highlight',
-      title: 'Highlight Text',
-      type: 'string',
-      description: 'Text highlighted in teal (e.g., No somos una empresa...)',
-    }),
+    defineField({ name: 'title', title: 'Título', type: 'string' }),
+    defineField({ name: 'description', title: 'Descripción Principal', type: 'text', rows: 3 }),
+    defineField({ name: 'highlight', title: 'Frase Destacada (Teal)', type: 'string' }),
+    
     defineField({
       name: 'values',
-      title: 'Values Cards',
+      title: 'Valores',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            defineField({ name: 'title', type: 'string' }),
-            defineField({ name: 'description', type: 'text' }),
+            defineField({ name: 'title', title: 'Título', type: 'string' }),
+            defineField({ name: 'description', title: 'Descripción', type: 'text' }),
             defineField({
               name: 'icon',
-              title: 'Icon Name',
+              title: 'Icono',
               type: 'string',
-              options: {
-                list: [
-                  { title: 'Users', value: 'Users' },
-                  { title: 'Heart', value: 'Heart' },
-                  { title: 'Mountain', value: 'Mountain' },
-                ],
-              },
+              options: { list: ['Users', 'Heart', 'Mountain'] },
             }),
           ],
         },
       ],
     }),
-    defineField({
-      name: 'requirementsTitle',
-      title: 'Requirements Title',
-      type: 'string',
-      initialValue: '¿Quiénes pueden sumarse?',
-    }),
-    defineField({
-      name: 'requirementsIntro',
-      title: 'Requirements Intro',
-      type: 'text',
-    }),
+
+    defineField({ name: 'requirementsTitle', title: 'Título Requisitos', type: 'string' }),
+    defineField({ name: 'requirementsIntro', title: 'Intro Requisitos', type: 'text' }),
     defineField({
       name: 'requirementsList',
-      title: 'Requirements List',
+      title: 'Lista de Requisitos',
       type: 'array',
       of: [{ type: 'string' }],
     }),
+    
+    defineField({ name: 'ctaText', title: 'Texto Botón', type: 'string', initialValue: '¿Cumplís los requisitos? Sumate Ahora' }),
+    defineField({ name: 'ctaLink', title: 'Enlace Botón', type: 'url' }),
   ],
 })

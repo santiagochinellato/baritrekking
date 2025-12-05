@@ -1,31 +1,22 @@
 import { defineField, defineType } from 'sanity'
 
-export default defineType({
+export const faq = defineType({
   name: 'faq',
-  title: 'FAQ Section',
+  title: 'Preguntas Frecuentes (FAQ)',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Section Title',
-      type: 'string',
-      initialValue: 'Preguntas Frecuentes',
-    }),
-    defineField({
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'string',
-    }),
+    defineField({ name: 'title', title: 'Título', type: 'string' }),
+    defineField({ name: 'subtitle', title: 'Subtítulo', type: 'string' }),
     defineField({
       name: 'questions',
-      title: 'Questions',
+      title: 'Preguntas',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            defineField({ name: 'question', type: 'string' }),
-            defineField({ name: 'answer', type: 'text' }),
+            defineField({ name: 'question', title: 'Pregunta', type: 'string' }),
+            defineField({ name: 'answer', title: 'Respuesta', type: 'text', rows: 3 }),
           ],
         },
       ],
