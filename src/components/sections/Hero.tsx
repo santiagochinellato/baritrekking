@@ -58,7 +58,7 @@ const Hero = () => {
     const words = heroData.title.split(" ");
     return (
       <>
-        <span className="text-bari-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+        <span className="text-bari-orange drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           {words[0]}
         </span>
         {words.length > 1 && " " + words.slice(1).join(" ")}
