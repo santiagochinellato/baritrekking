@@ -220,7 +220,7 @@ const CompactGroups = () => {
 
                 <CardContent className="p-0 space-y-6 flex-grow flex flex-col justify-between">
                   <div className="space-y-4">
-                    <div className="flex gap-2 flex-wrap">
+                    <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4">
                       {trekking.levels.map((level, i) => (
                         <span
                           key={i}
@@ -230,30 +230,79 @@ const CompactGroups = () => {
                         </span>
                       ))}
                     </div>
+                  </div>
 
-                    {/* Integrated Stats */}
-                    <div className="border-t border-white/20 pt-4 mt-6">
-                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
-                        {trekking.stats.map((stat, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="text-center"
-                          >
-                            <div className="flex justify-center mb-1">
-                              {getIcon(stat.icon, 16, "text-white/80")}
-                            </div>
-                            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
-                              {stat.value}
-                            </div>
-                            <div className="text-[10px] sm:text-xs text-white/70 font-medium uppercase tracking-wide">
-                              {stat.label}
-                            </div>
-                          </motion.div>
-                        ))}
+                  {/* Integrated Stats */}
+                  <div className=" pt-4 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      {/* Featured Stat (Members) - Left Side (2 cols) */}
+                      <div className="md:col-span-2 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-inner h-full">
+                        <div className="flex items-center gap-3 mb-2">
+                          {getIcon(
+                            trekking.stats.find((s) => s.label === "Miembros")
+                              ?.icon || "Users",
+                            48,
+                            "text-white w-10 h-10 lg:w-12 lg:h-12"
+                          )}
+                          <span className="text-lg font-bold text-white/90 uppercase tracking-widest">
+                            Comunidad
+                          </span>
+                        </div>
+                        <span className="text-5xl lg:text-6xl font-black text-white drop-shadow-sm leading-none my-2">
+                          {
+                            trekking.stats.find((s) => s.label === "Miembros")
+                              ?.value
+                          }
+                        </span>
+                        <span className="text-sm font-medium text-white/70">
+                          Miembros registradas
+                        </span>
+                      </div>
+
+                      {/* Other Stats - Right Side (2 cols) */}
+                      <div className="md:col-span-2 flex flex-col gap-3">
+                        {/* Row 1: Salidas & Eventos */}
+                        <div className="grid grid-cols-2 gap-3 flex-1">
+                          {trekking.stats
+                            .filter((s) =>
+                              ["Salidas", "Eventos"].includes(s.label)
+                            )
+                            .map((stat, idx) => (
+                              <div
+                                key={idx}
+                                className="flex flex-col items-center justify-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors"
+                              >
+                                {getIcon(stat.icon, 20, "text-white/80 mb-1")}
+                                <span className="text-lg font-bold text-white">
+                                  {stat.value}
+                                </span>
+                                <span className="text-[10px] uppercase font-medium text-white/60">
+                                  {stat.label}
+                                </span>
+                              </div>
+                            ))}
+                        </div>
+                        {/* Row 2: Cursos & Acciones */}
+                        <div className="grid grid-cols-2 gap-3 flex-1">
+                          {trekking.stats
+                            .filter((s) =>
+                              ["Cursos", "Acciones"].includes(s.label)
+                            )
+                            .map((stat, idx) => (
+                              <div
+                                key={idx}
+                                className="flex flex-col items-center justify-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors"
+                              >
+                                {getIcon(stat.icon, 20, "text-white/80 mb-1")}
+                                <span className="text-lg font-bold text-white">
+                                  {stat.value}
+                                </span>
+                                <span className="text-[10px] uppercase font-medium text-white/60">
+                                  {stat.label}
+                                </span>
+                              </div>
+                            ))}
+                        </div>
                       </div>
                     </div>
                   </div>

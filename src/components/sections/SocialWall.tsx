@@ -154,7 +154,10 @@ export const SocialWall = () => {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-bari-cream">
+    <section
+      className="py-24 bg-gradient-to-b from-white to-bari-cream"
+      id="socialWall"
+    >
       <Container>
         {/* Header */}
         <motion.div

@@ -5,7 +5,6 @@ import {
   ShieldAlert,
   Users,
   ArrowRight,
-  TrendingUp,
   Calendar,
   GraduationCap,
   Heart,
@@ -19,8 +18,8 @@ const Groups = () => {
   };
 
   const stats = [
-    { label: "Salidas", value: "200+", icon: Mountain },
-    { label: "Miembros", value: "1034", icon: Users },
+    { label: "Miembros", value: "1300", icon: Users, featured: true },
+    { label: "Salidas", value: "200", icon: Mountain },
     { label: "Eventos", value: "120", icon: Calendar },
     { label: "Cursos", value: "10", icon: GraduationCap },
     { label: "Acciones", value: "8", icon: Heart },
@@ -95,6 +94,45 @@ const Groups = () => {
                     </span>
                   </div>
                 </div>
+
+                {/* Stats Section */}
+                <div className="grid grid-cols-2 gap-4 mt-2">
+                  {/* Featured Stat (Members) - Redesigned for maximum impact */}
+                  <div className="col-span-2 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-inner">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Users className="text-white w-10 h-10 lg:w-12 lg:h-12" />
+                      <span className="text-lg font-bold text-white/90 uppercase tracking-widest">
+                        Comunidad Activa
+                      </span>
+                    </div>
+                    <span className="text-6xl lg:text-7xl font-black text-white drop-shadow-sm leading-none my-2">
+                      {stats.find((s) => s.label === "Miembros")?.value}
+                    </span>
+                    <span className="text-sm font-medium text-white/70">
+                      Miembros registradas
+                    </span>
+                  </div>
+
+                  {/* Other Stats Grid - Horizontal Row */}
+                  <div className="col-span-2 grid grid-cols-4 gap-2">
+                    {stats
+                      .filter((s) => s.label !== "Miembros")
+                      .map((stat, idx) => (
+                        <div
+                          key={idx}
+                          className="flex flex-col items-center justify-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors"
+                        >
+                          <stat.icon className="text-white/80 w-5 h-5 mb-1" />
+                          <span className="text-lg font-bold text-white">
+                            {stat.value}
+                          </span>
+                          <span className="text-[10px] uppercase font-medium text-white/60">
+                            {stat.label}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
                 <div className="flex justify-end w-full">
                   <Button
                     onClick={handleJoinClick}
@@ -109,48 +147,13 @@ const Groups = () => {
             </Card>
           </motion.div>
 
-          {/* Stats Card - Community in Numbers */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-1 lg:col-span-2"
-          >
-            <Card className="h-full bg-gradient-to-r from-bari-teal/10 to-bari-orange/10 border border-bari-teal/20 hover:shadow-lg transition-shadow">
-              <CardContent className="py-6 h-full flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp className="text-bari-teal" size={24} />
-                  <h3 className="text-xl font-bold text-bari-dark">
-                    Nuestra Comunidad en Números
-                  </h3>
-                </div>
-                <div className="grid grid-cols-5 gap-4">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="flex justify-center mb-2">
-                        <stat.icon className="text-bari-teal" size={24} />
-                      </div>
-                      <div className="text-2xl font-bold text-bari-dark">
-                        {stat.value}
-                      </div>
-                      <div className="text-xs text-bari-slate">
-                        {stat.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
           {/* Enhanced Prevention Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:col-span-1 lg:col-span-2"
+            className="md:col-span-1 lg:col-span-2 row-span-2"
           >
             <Card className="h-full bg-gradient-to-br from-orange-50 to-white border-2 border-bari-orange/30 hover:border-bari-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-bari-orange/10 rounded-full -mr-16 -mt-16" />

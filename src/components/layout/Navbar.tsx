@@ -1,27 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Container } from "./Container";
 import { cn } from "../../lib/utils";
+import { client, urlFor } from "../../lib/sanity";
+
+interface NavbarData {
+  logo?: {
+    asset: {
+      _ref: string;
+    };
+  };
+  links?: {
+    name: string;
+    href: string;
+  }[];
+  cta?: {
+    text: string;
+    link: string;
+  };
+}
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [navbarData, setNavbarData] = useState<NavbarData | null>(null);
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const fetchNavbarData = async () => {
+      try {
+        const data = await client.fetch('*[_type == "navbar"][0]');
+        setNavbarData(data);
+      } catch (error) {
+        console.error("Error fetching navbar data:", error);
+      }
+    };
+
+    fetchNavbarData();
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
   });
 
-  const navLinks = [
+  const navLinks = navbarData?.links || [
     { name: "Inicio", href: "#hero" },
     { name: "Manifiesto", href: "#manifesto" },
     { name: "Espacios", href: "#groups" },
   ];
 
+  const logoSrc = navbarData?.logo
+    ? urlFor(navbarData.logo).url()
+    : "https://i.ibb.co/LfhB81V/btLogo.webp";
+
+  const ctaText = navbarData?.cta?.text || "Unirme Ahora";
+  const ctaLink = navbarData?.cta?.link || "#";
+
   const handleCTAClick = () => {
-    window.location.href = "#"; // Replace with actual registration link
+    window.location.href = ctaLink;
   };
 
   return (
@@ -45,7 +83,7 @@ const Navbar = () => {
             className="flex items-center gap-2 group transition-all duration-300"
           >
             <motion.img
-              src="https://i.ibb.co/LfhB81V/btLogo.webp"
+              src={logoSrc}
               alt="Bari.Trekking Logo"
               className={cn(
                 "transition-all duration-300",
@@ -81,7 +119,7 @@ const Navbar = () => {
               )}
               size="sm"
             >
-              Unirme Ahora
+              {ctaText}
             </Button>
           </div>
 
@@ -130,7 +168,7 @@ const Navbar = () => {
               }}
               size="lg"
             >
-              Unirme Ahora
+              {ctaText}
             </Button>
           </div>
         </motion.div>
