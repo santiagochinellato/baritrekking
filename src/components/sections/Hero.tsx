@@ -41,15 +41,22 @@ const Hero = () => {
     if (!heroData?.title) {
       return (
         <>
-          CONECTAR
+          <span className="text-bari-orange">CONECTAR</span>
           <br />
           COMPARTIR
           <br />
-          <span className="text-bari-orange">SER COMUNIDAD</span>
+          SER COMUNIDAD
         </>
       );
     }
-    return heroData.title;
+
+    const words = heroData.title.split(" ");
+    return (
+      <>
+        <span className="text-bari-orange">{words[0]}</span>
+        {words.length > 1 && " " + words.slice(1).join(" ")}
+      </>
+    );
   };
 
   return (
@@ -64,7 +71,7 @@ const Hero = () => {
           alt="Comunidad Bari.Trekking"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bari-teal/70 via-bari-teal/20 to-bari-teal/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bari-teal/50 via-bari-teal/20 to-bari-teal/60" />
       </div>
 
       <Container className="relative z-10 text-center px-4">
