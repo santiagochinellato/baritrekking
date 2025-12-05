@@ -45,7 +45,7 @@ const Navbar = () => {
             className="flex items-center gap-2 group transition-all duration-300"
           >
             <motion.img
-              src="public/btLogo.webp"
+              src="https://i.ibb.co/LfhB81V/btLogo.webp"
               alt="Bari.Trekking Logo"
               className={cn(
                 "transition-all duration-300",

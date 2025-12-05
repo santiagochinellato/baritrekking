@@ -7,7 +7,11 @@ const Footer = () => {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4 flex flex-col items-center">
-            <img src="public/btLogo.webp" alt="" className="w-24" />
+            <img
+              src="https://i.ibb.co/LfhB81V/btLogo.webp"
+              alt=""
+              className="w-24"
+            />
             <p className="text-sm text-gray-400 text-center lg:text-left">
               Comunidad de trekking en la Patagonia. Explorando senderos,
               respetando la naturaleza.
