@@ -53,7 +53,7 @@ const getIcon = (
 
 export const TrekkingCard = ({ data }: TrekkingCardProps) => {
   const trekkingImage = data.image
-    ? urlFor(data.image).width(1200).url()
+    ? urlFor(data.image).width(1200).auto("format").url()
     : "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070";
 
   return (

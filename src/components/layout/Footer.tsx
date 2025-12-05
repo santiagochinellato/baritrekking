@@ -38,7 +38,7 @@ const Footer = () => {
   }, []);
 
   const logoSrc = footerData?.logo
-    ? urlFor(footerData.logo).url()
+    ? urlFor(footerData.logo).width(200).auto("format").url()
     : "https://i.ibb.co/LfhB81V/btLogo.webp";
 
   const description =
@@ -129,19 +129,19 @@ const Footer = () => {
     >
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4 flex flex-col items-center">
+          <div className="space-y-4 flex flex-col items-start">
             <img src={logoSrc} alt="Bari.Trekking Logo" className="w-24" />
-            <p className="text-sm text-gray-400 text-center lg:text-left">
+            <p className="text-sm text-gray-300 text-center lg:text-left">
               {description}
             </p>
           </div>
 
           {linkColumns.map((col, idx) => (
             <div key={idx}>
-              <h4 className="font-heading font-semibold mb-4 text-bari-gold">
+              <h3 className="font-heading font-semibold mb-4 text-bari-gold">
                 {col.title}
-              </h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              </h3>
+              <ul className="space-y-2 text-sm text-gray-300">
                 {col.links.map((link, linkIdx) => (
                   <li key={linkIdx}>
                     <a
@@ -157,9 +157,9 @@ const Footer = () => {
           ))}
 
           <div>
-            <h4 className="font-heading font-semibold mb-4 text-bari-gold">
+            <h3 className="font-heading font-semibold mb-4 text-bari-gold">
               Conectate con Nosotros
-            </h4>
+            </h3>
             <div className="flex gap-4 mb-4">
               {socialLinks.map((social) => (
                 <a
@@ -174,13 +174,13 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            <p className="text-xs text-gray-500">{followText}</p>
+            <p className="text-xs text-gray-400">{followText}</p>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-500">
+        <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-400">
           {copyrightText}
         </div>
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-400 text-center">
           Diseñado con ❤️ en Bariloche por{" "}
           <a
             href={developer.url}

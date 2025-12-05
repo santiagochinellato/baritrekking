@@ -23,7 +23,9 @@ interface SocialWallData {
 
 const SocialCard = ({ item, index }: { item: SocialItem; index: number }) => {
   const isStory = item.type === "story";
-  const imageUrl = item.image ? urlFor(item.image).width(800).url() : "";
+  const imageUrl = item.image
+    ? urlFor(item.image).width(800).auto("format").url()
+    : "";
 
   return (
     <motion.div

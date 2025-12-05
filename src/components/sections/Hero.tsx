@@ -26,20 +26,14 @@ const Hero = () => {
     : "https://i.ibb.co/LfhB81V/btLogo.webp";
 
   // Default values while loading or if no data
-  // const title = heroData?.title || "CONECTAR COMPARTIR SER COMUNIDAD";
   const subtitle =
     heroData?.subtitle ||
     "Somos residentes de Bariloche creando un espacio para encontrarnos, caminar y compartir experiencias.";
   const bgImage = heroData?.backgroundImage
     ? urlFor(heroData.backgroundImage).width(1920).url()
-    : "public/realHero.webp";
+    : "/realHero.webp";
 
   // Function to render title with line breaks if it contains them, or custom logic
-  // For now, we'll assume the user enters the full string.
-  // If we want to maintain the specific styling of "SER COMUNIDAD" in orange,
-  // we might need a Portable Text field or simple string splitting.
-  // Let's try to parse the default title structure if it matches.
-
   const renderTitle = () => {
     if (!heroData?.title) {
       return (
