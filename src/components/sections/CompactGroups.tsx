@@ -169,14 +169,14 @@ const CompactGroups = () => {
         </motion.div>
 
         {/* Compact Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
           {/* Card A: Trekking Principal - Large with integrated stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="md:col-span-2 row-span-2"
+            className="lg:col-span-2 row-span-2"
           >
             <Card className="h-full relative overflow-hidden border-none shadow-xl group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               {/* Background Image with Overlay */}
@@ -220,7 +220,7 @@ const CompactGroups = () => {
 
                 <CardContent className="p-0 space-y-6 flex-grow flex flex-col justify-between">
                   <div className="space-y-4">
-                    <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4">
+                    <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4 justify-center lg:justify-start  ">
                       {trekking.levels.map((level, i) => (
                         <span
                           key={i}
@@ -326,20 +326,22 @@ const CompactGroups = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-1 row-span-2"
+            className="lg:col-span-1 row-span-2"
           >
             <Card className="h-full bg-gradient-to-br from-gray-900 via-bari-dark to-gray-900 text-white border-none shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative overflow-hidden">
               {/* Decorative gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-bari-gold/5 via-transparent to-bari-orange/5 pointer-events-none" />
 
               <CardHeader className="pb-4 relative z-10">
-                <div className="inline-block bg-gradient-to-r from-bari-gold to-amber-400 text-bari-dark px-4 py-1.5 rounded-full text-xs font-bold mb-4 shadow-lg">
+                <div className="inline-block bg-gradient-to-r from-bari-gold to-amber-400 text-bari-dark px-4 py-1.5 rounded-full text-xs font-bold mb-4 shadow-lg text-center w-[80%] lg:w-64 m-auto">
                   {social.badge}
                 </div>
-                <CardTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-bari-gold via-amber-300 to-bari-gold bg-clip-text text-transparent mb-2">
+                <CardTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-bari-gold via-amber-300 to-bari-gold bg-clip-text text-transparent mb-2 text-center lg:text-left">
                   {social.title}
                 </CardTitle>
-                <p className="text-gray-400 text-sm">{social.description}</p>
+                <p className="text-gray-400 text-sm text-center lg:text-left">
+                  {social.description}
+                </p>
               </CardHeader>
 
               <CardContent className="flex-grow flex flex-col justify-between relative z-10">
@@ -401,12 +403,12 @@ const CompactGroups = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:col-span-1 row-span-1"
+            className="lg:col-span-1 row-span-1"
           >
             <Card className="h-full bg-gradient-to-br from-orange-50 to-white border-2 border-bari-orange/30 hover:border-bari-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-bari-orange/10 rounded-full -mr-16 -mt-16" />
               <div className="relative p-6">
-                <div className="flex flex-col sm:flex-row sm:items-center items-start gap-4 mb-4">
+                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 mb-4">
                   <div className="bg-bari-orange/20 p-3 rounded-lg">
                     <ShieldAlert className="text-bari-orange" size={32} />
                   </div>
@@ -414,10 +416,10 @@ const CompactGroups = () => {
                     {prevention.title}
                   </CardTitle>
                 </div>
-                <p className="text-bari-dark text-sm sm:text-base font-medium leading-relaxed mb-4">
+                <p className="text-bari-dark text-sm sm:text-base lg:text-left text-center font-medium leading-relaxed mb-4">
                   {prevention.description}
                 </p>
-                <div className="inline-flex items-center gap-2 text-bari-orange text-xs sm:text-sm font-semibold">
+                <div className=" w-full inline-flex items-center justify-center lg:justify-start gap-2 text-bari-orange text-xs sm:text-sm font-semibold">
                   <ShieldAlert size={16} />
                   <span>{prevention.tagline}</span>
                 </div>
@@ -431,7 +433,7 @@ const CompactGroups = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="md:col-span-2 row-span-1"
+            className="lg:col-span-2 row-span-1"
           >
             <Card className="h-full bg-gradient-to-br from-green-50 via-white to-green-50 border-2 border-green-200 hover:border-green-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
               <div className="flex flex-col items-center text-center p-6 md:p-8">

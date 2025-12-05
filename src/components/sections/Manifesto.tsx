@@ -128,7 +128,7 @@ const Manifesto = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-heading font-bold text-bari-dark mb-8"
+            className="text-4xl md:text-5xl font-heading font-bold text-bari-dark mb-8 "
           >
             {title}
           </motion.h2>
@@ -169,7 +169,7 @@ const Manifesto = () => {
               >
                 {getIcon(value.icon)}
               </motion.div>
-              <h3 className="text-xl font-bold text-bari-dark">
+              <h3 className="text-xl font-bold text-bari-dark ">
                 {value.title}
               </h3>
               <p className="text-bari-slate">{value.description}</p>
@@ -191,7 +191,7 @@ const Manifesto = () => {
 
           <div className="flex flex-col md:flex-row gap-12 items-center mt-4">
             <div className="flex-1 space-y-6">
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark">
+              <h3 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark text-center lg:text-left">
                 {reqTitle}
               </h3>
               <p className="text-bari-dark text-lg font-medium">{reqIntro}</p>
