@@ -2,8 +2,29 @@ import { Container } from "../layout/Container";
 import { Heart, Users, ShieldCheck, Mountain } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/Button";
+import { useSanity } from "../../hooks/useSanity";
+
+interface ValueItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface ManifestoData {
+  title: string;
+  description: string;
+  highlight: string;
+  values: ValueItem[];
+  requirementsTitle: string;
+  requirementsIntro: string;
+  requirementsList: string[];
+}
 
 const Manifesto = () => {
+  const { data: manifestoData } = useSanity<ManifestoData>(
+    `*[_type == "manifesto"][0]`
+  );
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -23,6 +44,76 @@ const Manifesto = () => {
     },
   };
 
+  // Helper to get icon component
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Users":
+        return <Users size={40} />;
+      case "Heart":
+        return <Heart size={40} />;
+      case "Mountain":
+        return <Mountain size={40} />;
+      default:
+        return <Users size={40} />;
+    }
+  };
+
+  // Helper for icon colors
+  const getIconStyles = (iconName: string) => {
+    switch (iconName) {
+      case "Users":
+        return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
+      case "Heart":
+        return "bg-bari-orange/10 text-bari-orange group-hover:bg-bari-orange";
+      case "Mountain":
+        return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
+      default:
+        return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
+    }
+  };
+
+  // Defaults
+  const title = manifestoData?.title || "Volver a lo Simple";
+  const description =
+    manifestoData?.description ||
+    "Bari.Trekking nace de la necesidad de conectar con la montaña, conocer gente real y generar vínculos genuinos.";
+  const highlight =
+    manifestoData?.highlight || "No somos una empresa. Somos una comunidad.";
+
+  const values = manifestoData?.values || [
+    {
+      title: "Comunidad Real",
+      description:
+        "Facilitamos encuentros reales en la naturaleza y en la vida cotidiana. Sin guías, construyendo entre todos.",
+      icon: "Users",
+    },
+    {
+      title: "Valores Claros",
+      description:
+        "Respeto, Compromiso, Responsabilidad y Comunicación son los pilares que sostienen nuestro espacio.",
+      icon: "Heart",
+    },
+    {
+      title: "Autonomía",
+      description:
+        "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos la montaña consciente.",
+      icon: "Mountain",
+    },
+  ];
+
+  const reqTitle =
+    manifestoData?.requirementsTitle || "¿Quiénes pueden sumarse?";
+  const reqIntro =
+    manifestoData?.requirementsIntro ||
+    "Para mantener la esencia de nuestro grupo, tenemos algunos requisitos simples pero fundamentales:";
+  const reqList = manifestoData?.requirementsList || [
+    "Vivir en Bariloche o Dina Huapi",
+    "Respetar normas de convivencia y cuidado mutuo",
+    "Cuidar el entorno y no dejar rastro",
+    "Ser responsable de tu propia seguridad y equipo",
+    "Aportar buena energía y ganas de participar",
+  ];
+
   return (
     <section id="manifesto" className="py-24 bg-white relative overflow-hidden">
       {/* Decorative background elements */}
@@ -39,7 +130,7 @@ const Manifesto = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-heading font-bold text-bari-dark mb-8"
           >
-            Volver a lo Simple
+            {title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -48,10 +139,9 @@ const Manifesto = () => {
             transition={{ delay: 0.2 }}
             className="text-xl text-bari-slate leading-relaxed"
           >
-            Bari.Trekking nace de la necesidad de conectar con la montaña,
-            conocer gente real y generar vínculos genuinos.
+            {description}
             <span className="block mt-4 font-medium text-bari-teal">
-              No somos una empresa. Somos una comunidad.
+              {highlight}
             </span>
           </motion.p>
         </div>
@@ -63,62 +153,28 @@ const Manifesto = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24"
         >
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="text-center space-y-4 group cursor-pointer"
-          >
+          {values.map((value, index) => (
             <motion.div
-              className="w-20 h-20 mx-auto bg-bari-teal/10 rounded-full flex items-center justify-center text-bari-teal transition-all group-hover:bg-bari-teal group-hover:text-white group-hover:shadow-lg"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
+              key={index}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="text-center space-y-4 group cursor-pointer"
             >
-              <Users size={40} />
+              <motion.div
+                className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center transition-all group-hover:text-white group-hover:shadow-lg ${getIconStyles(
+                  value.icon
+                )}`}
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
+                {getIcon(value.icon)}
+              </motion.div>
+              <h3 className="text-xl font-bold text-bari-dark">
+                {value.title}
+              </h3>
+              <p className="text-bari-slate">{value.description}</p>
             </motion.div>
-            <h3 className="text-xl font-bold text-bari-dark">Comunidad Real</h3>
-            <p className="text-bari-slate">
-              Facilitamos encuentros reales en la naturaleza y en la vida
-              cotidiana. Sin guías, construyendo entre todos.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="text-center space-y-4 group cursor-pointer"
-          >
-            <motion.div
-              className="w-20 h-20 mx-auto bg-bari-orange/10 rounded-full flex items-center justify-center text-bari-orange transition-all group-hover:bg-bari-orange group-hover:text-white group-hover:shadow-lg"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Heart size={40} />
-            </motion.div>
-            <h3 className="text-xl font-bold text-bari-dark">Valores Claros</h3>
-            <p className="text-bari-slate">
-              Respeto, Compromiso, Responsabilidad y Comunicación son los
-              pilares que sostienen nuestro espacio.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="text-center space-y-4 group cursor-pointer"
-          >
-            <motion.div
-              className="w-20 h-20 mx-auto bg-bari-gold/10 rounded-full flex items-center justify-center text-bari-gold transition-all group-hover:bg-bari-gold group-hover:text-white group-hover:shadow-lg"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Mountain size={40} />
-            </motion.div>
-            <h3 className="text-xl font-bold text-bari-dark">Autonomía</h3>
-            <p className="text-bari-slate">
-              Cada miembro es responsable de su seguridad, equipo y decisiones.
-              Promovemos la montaña consciente.
-            </p>
-          </motion.div>
+          ))}
         </motion.div>
 
         {/* Enhanced Requirements Section */}
@@ -129,29 +185,20 @@ const Manifesto = () => {
           className="relative bg-gradient-to-br from-bari-teal/5 via-white to-bari-orange/5 rounded-3xl p-8 md:p-12 border-2 border-bari-teal/20 shadow-xl"
         >
           {/* Badge */}
-          <div className="absolute w-[calc(100%-4rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(50%-4rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
             ⚠️ Requisitos Importantes
           </div>
 
           <div className="flex flex-col md:flex-row gap-12 items-center mt-4">
             <div className="flex-1 space-y-6">
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark">
-                ¿Quiénes pueden sumarse?
+                {reqTitle}
               </h3>
-              <p className="text-bari-dark text-lg font-medium">
-                Para mantener la esencia de nuestro grupo, tenemos algunos
-                requisitos simples pero fundamentales:
-              </p>
+              <p className="text-bari-dark text-lg font-medium">{reqIntro}</p>
             </div>
             <div className="flex-1 w-full">
               <ul className="space-y-4">
-                {[
-                  "Vivir en Bariloche o Dina Huapi",
-                  "Respetar normas de convivencia y cuidado mutuo",
-                  "Cuidar el entorno y no dejar rastro",
-                  "Ser responsable de tu propia seguridad y equipo",
-                  "Aportar buena energía y ganas de participar",
-                ].map((item, index) => (
+                {reqList.map((item, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -20 }}

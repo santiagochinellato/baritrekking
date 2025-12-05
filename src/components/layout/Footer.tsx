@@ -108,6 +108,17 @@ const Footer = () => {
           © {new Date().getFullYear()} Bari.Trekking. Todos los derechos
           reservados.
         </div>
+        <p className="text-xs text-gray-500 text-center">
+          Diseñado con ❤️ en Bariloche por{" "}
+          <a
+            href="https://portfolio-santiago-chinellato.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-bari-gold"
+          >
+            Santiago Chinellato
+          </a>
+        </p>
       </Container>
     </footer>
   );
