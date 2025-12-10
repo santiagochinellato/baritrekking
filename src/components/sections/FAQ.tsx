@@ -38,7 +38,7 @@ const FAQItem = ({
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-5 px-6 flex items-center justify-between hover:bg-bari-teal/5 transition-colors group"
       >
-        <span className="text-left text-base font-semibold text-bari-dark group-hover:text-bari-teal transition-colors">
+        <span className="text-left text-base font-semibold text-bari-teal group-hover:text-bari-orange transition-colors">
           {title}
         </span>
         <ChevronDown
@@ -110,7 +110,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-bari-teal mb-4">
             {title}
           </h2>
           <p className="text-bari-slate text-lg">{subtitle}</p>

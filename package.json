@@ -11,12 +11,14 @@
     "tunnel": "vite --host & npx -y localtunnel --port 5173"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@sanity/client": "^7.13.1",
     "@sanity/image-url": "^2.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.25",
+    "gsap": "^3.14.1",
     "lucide-react": "^0.555.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

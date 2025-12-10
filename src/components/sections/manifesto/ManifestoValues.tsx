@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Users, Mountain } from "lucide-react";
+import { Heart, Users, Compass, Shield } from "lucide-react";
 
 interface ValueItem {
   title: string;
@@ -17,8 +17,12 @@ const getIcon = (iconName: string) => {
       return <Users size={40} />;
     case "Heart":
       return <Heart size={40} />;
-    case "Mountain":
-      return <Mountain size={40} />;
+    case "Mountain": // Keep for backward compat if needed
+      return <Compass size={40} />;
+    case "Compass":
+      return <Compass size={40} />;
+    case "Shield":
+      return <Shield size={40} />;
     default:
       return <Users size={40} />;
   }
@@ -31,6 +35,10 @@ const getIconStyles = (iconName: string) => {
     case "Heart":
       return "bg-bari-orange/10 text-bari-orange group-hover:bg-bari-orange";
     case "Mountain":
+      return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
+    case "Compass":
+      return "bg-blue-500/10 text-blue-500 group-hover:bg-blue-500";
+    case "Shield":
       return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
     default:
       return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
@@ -61,7 +69,7 @@ export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24"
+      className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24"
     >
       {values.map((value, index) => (
         <motion.div

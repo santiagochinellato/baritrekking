@@ -29,7 +29,6 @@ const SocialCard = ({ item, index }: { item: SocialItem; index: number }) => {
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, scale: 1.05 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -38,8 +37,8 @@ const SocialCard = ({ item, index }: { item: SocialItem; index: number }) => {
         delay: index * 0.08,
         ease: [0.43, 0.13, 0.23, 0.96],
       }}
-      className={`relative overflow-hidden rounded-2xl cursor-pointer group ${
-        isStory ? "row-span-2" : "row-span-1"
+      className={`relative overflow-hidden rounded-2xl cursor-pointer group shrink-0 w-[85vw] sm:w-[350px] md:w-auto h-[400px] md:h-auto snap-center ${
+        isStory ? "md:row-span-2" : "md:row-span-1"
       }`}
     >
       {/* Image */}
@@ -158,7 +157,7 @@ export const SocialWall = () => {
   return (
     <section
       className="py-24 bg-gradient-to-b from-white to-bari-cream"
-      id="socialWall"
+      id="social-wall"
     >
       <Container>
         {/* Header */}
@@ -180,14 +179,21 @@ export const SocialWall = () => {
           </p>
         </motion.div>
 
-        {/* Grid */}
+        {/* Grid / Carousel */}
         <div
-          className="relative min-h-[416px] md:min-h-[576px] overflow-hidden"
+          className="relative min-h-[416px] md:min-h-[576px] overflow-hidden md:overflow-visible"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[280px]">
-            <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={currentSet}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="w-full flex md:grid md:grid-cols-4 gap-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 md:auto-rows-[280px]"
+            >
               {displayItems.map((item, index) => (
                 <SocialCard
                   key={`${item._key}-${currentSet}`}
@@ -195,8 +201,8 @@ export const SocialWall = () => {
                   index={index}
                 />
               ))}
-            </AnimatePresence>
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Pause Indicator */}
           {isPaused && (

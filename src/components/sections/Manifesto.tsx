@@ -2,7 +2,6 @@ import { Container } from "../layout/Container";
 import { motion } from "framer-motion";
 import { useSanity } from "../../hooks/useSanity";
 import { ManifestoValues } from "./manifesto/ManifestoValues";
-import { RequirementsList } from "./manifesto/RequirementsList";
 
 interface ValueItem {
   title: string;
@@ -35,39 +34,43 @@ const Manifesto = () => {
   const highlight =
     manifestoData?.highlight || "No somos una empresa. Somos una comunidad.";
 
-  const values = manifestoData?.values || [
+  const rawValues = manifestoData?.values || [
     {
       title: "Comunidad Real",
       description:
-        "Facilitamos encuentros reales en la naturaleza y en la vida cotidiana. Sin guías, construyendo entre todos.",
+        "Generamos espacios que facilitan encuentros reales en la naturaleza y en la vida cotidiana con el aporte de cada integrante.",
       icon: "Users",
+    },
+    {
+      title: "Actividades autogestivas",
+      description:
+        "Formada por Residentes de Bariloche, donde cada salida la propone un miembro y cada uno es responsable de su seguridad y cuidado.",
+      icon: "Compass",
     },
     {
       title: "Valores Claros",
       description:
-        "Respeto, Compromiso, Responsabilidad y Comunicación son los pilares que sostienen nuestro espacio.",
+        "Funcionamos desde valores que cuidan el espacio: Respeto, Compromiso, Responsabilidad y Comunicación.",
       icon: "Heart",
     },
     {
-      title: "Autonomía",
+      title: "Autonomía responsable",
       description:
-        "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos la montaña consciente.",
-      icon: "Mountain",
+        "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos el respeto entre Miembros y con la Naturaleza.",
+      icon: "Shield",
     },
   ];
 
-  const reqTitle =
-    manifestoData?.requirementsTitle || "¿Quiénes pueden sumarse?";
-  const reqIntro =
-    manifestoData?.requirementsIntro ||
-    "Para mantener la esencia de nuestro grupo, tenemos algunos requisitos simples pero fundamentales:";
-  const reqList = manifestoData?.requirementsList || [
-    "Vivir en Bariloche o Dina Huapi",
-    "Respetar normas de convivencia y cuidado mutuo",
-    "Cuidar el entorno y no dejar rastro",
-    "Ser responsable de tu propia seguridad y equipo",
-    "Aportar buena energía y ganas de participar",
-  ];
+  // Force icons for specific titles to ensure they match content regardless of CMS data
+  const values = rawValues.map((value) => {
+    if (value.title === "Actividades autogestivas") {
+      return { ...value, icon: "Compass" };
+    }
+    if (value.title === "Autonomía responsable") {
+      return { ...value, icon: "Shield" };
+    }
+    return value;
+  });
 
   return (
     <section id="manifesto" className="py-24 bg-white relative overflow-hidden">
@@ -102,14 +105,6 @@ const Manifesto = () => {
         </div>
 
         <ManifestoValues values={values} />
-
-        <RequirementsList
-          title={reqTitle}
-          intro={reqIntro}
-          list={reqList}
-          ctaText={manifestoData?.ctaText}
-          ctaLink={manifestoData?.ctaLink}
-        />
       </Container>
     </section>
   );

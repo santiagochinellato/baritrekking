@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { useSanity } from "../../hooks/useSanity";
 import { TrekkingCard } from "../cards/TrekkingCard";
 import { SocialCard } from "../cards/SocialCard";
-import { PreventionCard } from "../cards/PreventionCard";
-import { CommunityCard } from "../cards/CommunityCard";
 
 interface StatItem {
   label: string;
@@ -100,14 +98,6 @@ const CompactGroups = () => {
     tagline: "Tu seguridad es prioridad",
   };
 
-  // Community Card Defaults
-  const community = groupsData?.communityCard || {
-    title: "Comunidad",
-    description:
-      "Acciones voluntarias, cuidado del entorno y proyectos colaborativos. \nPorque la montaña se disfruta más cuando la cuidamos entre todos.",
-    tagline: "Juntos hacemos más",
-  };
-
   return (
     <section id="groups" className="py-24 bg-bari-cream">
       <Container>
@@ -125,12 +115,10 @@ const CompactGroups = () => {
           </p>
         </motion.div>
 
-        {/* Compact Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
-          <TrekkingCard data={trekking} />
+        {/* Compact Bento Grid - 2 Cols */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-[minmax(200px,auto)]">
+          <TrekkingCard data={{ ...trekking, prevention }} />
           <SocialCard data={social} />
-          <PreventionCard data={prevention} />
-          <CommunityCard data={community} />
         </div>
       </Container>
     </section>

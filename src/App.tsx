@@ -2,6 +2,8 @@ import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
 import { Manifesto } from "./components/sections/Manifesto";
+import { Requirements } from "./components/sections/Requirements";
+import { HowItWorks } from "./components/sections/HowItWorks";
 import { CompactGroups } from "./components/sections/CompactGroups";
 import { SocialWall } from "./components/sections/SocialWall";
 import { FAQ } from "./components/sections/FAQ";
@@ -53,6 +55,8 @@ function App() {
         <main className="flex-grow">
           <Hero />
           <Manifesto />
+          <Requirements />
+          <HowItWorks />
           <CompactGroups />
           <SocialWall />
           <CommunityCTA />

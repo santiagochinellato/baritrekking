@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Mountain,
-  Users,
-  Calendar,
-  GraduationCap,
-  Heart,
-  ArrowRight,
-} from "lucide-react";
+import { Mountain, ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 import { urlFor } from "../../lib/sanity";
@@ -27,29 +20,13 @@ export interface TrekkingCardProps {
     stats: StatItem[];
     buttonText?: string;
     buttonLink?: string;
+    prevention?: {
+      title: string;
+      description: string;
+      tagline: string;
+    };
   };
 }
-
-const getIcon = (
-  iconName: string,
-  size: number = 24,
-  className: string = ""
-) => {
-  switch (iconName) {
-    case "Mountain":
-      return <Mountain size={size} className={className} />;
-    case "Users":
-      return <Users size={size} className={className} />;
-    case "Calendar":
-      return <Calendar size={size} className={className} />;
-    case "GraduationCap":
-      return <GraduationCap size={size} className={className} />;
-    case "Heart":
-      return <Heart size={size} className={className} />;
-    default:
-      return <Users size={size} className={className} />;
-  }
-};
 
 export const TrekkingCard = ({ data }: TrekkingCardProps) => {
   const trekkingImage = data.image
@@ -62,7 +39,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="lg:col-span-2 row-span-2"
+      className="lg:col-span-1 row-span-2"
     >
       <Card className="h-full relative overflow-hidden border-none shadow-xl group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <div
@@ -89,10 +66,10 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
               </motion.div>
               <Mountain className="text-white/60 hidden sm:block" size={40} />
             </div>
-            <CardTitle className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-3 sm:mb-4 text-center sm:text-left">
+            <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 text-center sm:text-left">
               {data.title}
             </CardTitle>
-            <p className="text-white/95 text-sm sm:text-base md:text-lg leading-relaxed text-center sm:text-left">
+            <p className="text-white/95 text-sm sm:text-base leading-relaxed text-center sm:text-left">
               {data.description}
             </p>
           </CardHeader>
@@ -111,72 +88,39 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
               </div>
             </div>
 
-            <div className="pt-4 w-full">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="md:col-span-2 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-inner h-full">
-                  <div className="flex items-center gap-3 mb-2">
-                    {getIcon(
-                      data.stats.find((s) => s.label === "Miembros")?.icon ||
-                        "Users",
-                      48,
-                      "text-white w-10 h-10 lg:w-12 lg:h-12"
-                    )}
-                    <span className="text-lg font-bold text-white/90 uppercase tracking-widest">
-                      Comunidad
-                    </span>
+            <div className="pt-4 w-full flex-grow">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {data.stats.slice(0, 4).map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white/10 rounded-lg p-3 flex flex-col items-center justify-center text-center"
+                  >
+                    <span className="text-xl font-bold">{stat.value}</span>
+                    <span className="text-xs text-white/70">{stat.label}</span>
                   </div>
-                  <span className="text-5xl lg:text-6xl font-black text-white drop-shadow-sm leading-none my-2">
-                    {data.stats.find((s) => s.label === "Miembros")?.value}
-                  </span>
-                  <span className="text-sm font-medium text-white/70">
-                    Miembros registradas
-                  </span>
-                </div>
-
-                <div className="md:col-span-2 flex flex-col gap-3">
-                  <div className="grid grid-cols-2 gap-3 flex-1">
-                    {data.stats
-                      .filter((s) => ["Salidas", "Eventos"].includes(s.label))
-                      .map((stat, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center justify-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors"
-                        >
-                          {getIcon(stat.icon, 20, "text-white/80 mb-1")}
-                          <span className="text-lg font-bold text-white">
-                            {stat.value}
-                          </span>
-                          <span className="text-[10px] uppercase font-medium text-white/60">
-                            {stat.label}
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 flex-1">
-                    {data.stats
-                      .filter((s) => ["Cursos", "Acciones"].includes(s.label))
-                      .map((stat, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-center justify-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors"
-                        >
-                          {getIcon(stat.icon, 20, "text-white/80 mb-1")}
-                          <span className="text-lg font-bold text-white">
-                            {stat.value}
-                          </span>
-                          <span className="text-[10px] uppercase font-medium text-white/60">
-                            {stat.label}
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-                </div>
+                ))}
               </div>
+
+              {/* Prevention Section */}
+              {data.prevention && (
+                <div className="bg-white/10 rounded-xl p-4 border border-white/10 mb-4">
+                  <h4 className="font-bold text-bari-gold mb-1 flex items-center gap-2">
+                    🛡️ {data.prevention.title}
+                  </h4>
+                  <p className="text-xs text-white/80 leading-relaxed mb-2">
+                    {data.prevention.description}
+                  </p>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-white/60">
+                    {data.prevention.tagline}
+                  </div>
+                </div>
+              )}
             </div>
 
             <Button
               onClick={() => (window.location.href = data.buttonLink || "#")}
-              className="mt-4 bg-white text-bari-teal hover:bg-bari-cream font-bold py-4 sm:py-6 rounded-full shadow-lg hover:shadow-xl transition-all text-base sm:text-lg group w-full sm:max-w-sm sm:mx-0"
+              className="mt-4 bg-white text-bari-teal hover:bg-bari-cream font-bold py-4 sm:py-6 rounded-full shadow-lg hover:shadow-xl transition-all text-base sm:text-lg group w-full"
               size="lg"
             >
               {data.buttonText || "Unirme al Grupo"}

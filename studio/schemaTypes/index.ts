@@ -7,5 +7,6 @@ import { navbar } from './navbar'
 import { footer } from './footer'
 import { seo } from './settings'
 import { communityCTA } from './communityCTA'
+import { howItWorks } from './howItWorks'
 
-export const schemaTypes = [hero, manifesto, groups, faq, socialWall, navbar, footer, seo, communityCTA]
+export const schemaTypes = [hero, manifesto, groups, faq, socialWall, navbar, footer, seo, communityCTA, howItWorks]

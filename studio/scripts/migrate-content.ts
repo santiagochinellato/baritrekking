@@ -265,6 +265,22 @@ async function migrate() {
       buttonLink: "#"
     };
 
+    // How It Works Data
+    const howItWorksData = {
+      _type: 'howItWorks',
+      _id: 'howItWorks-singleton',
+      title: 'El Sendero',
+      subtitle: 'Cómo funciona nuestra comunidad, paso a paso.',
+      steps: [
+        "Te sumás a los grupos en los que quieras participar.",
+        "Los miembros publican salidas y actividades: trekking, caminatas, mates, catas de vinos, encuentros y propuestas sociales.",
+        "Vos elegís libremente a qué sumarte o incluso podés proponer tu propia actividad.",
+        "Moderamos los grupos para que estén ordenados y no sean un caos de mensajes.",
+        "Cuidamos el ambiente del grupo: si alguien no respeta normas o valores, puede ser removido.",
+        "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales.",
+      ]
+    };
+
     // SEO Settings Data
     const settingsData = {
       _type: 'settings',
@@ -301,6 +317,9 @@ async function migrate() {
 
     console.log('Creating/Updating Community CTA...')
     await client.createOrReplace(communityCTAData)
+
+    console.log('Creating/Updating How It Works...')
+    await client.createOrReplace(howItWorksData)
 
     console.log('Creating/Updating SEO Settings...')
     await client.createOrReplace(settingsData)
