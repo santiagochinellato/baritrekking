@@ -57,7 +57,11 @@ async function migrate() {
       links: [
         { _key: '1', name: "Inicio", href: "#hero" },
         { _key: '2', name: "Manifiesto", href: "#manifesto" },
+        { _key: '921252ed4f47', name: "Requisitos", href: "#requisitos" },
+        { _key: 'ffc2471a98f3', name: "El sendero", href: "#sendero" },
         { _key: '3', name: "Espacios", href: "#groups" },
+        { _key: '159e2ef2f544', name: "Social wall", href: "#social-wall" },
+        { _key: 'b174acdf6683', name: "Preguntas frecuentes", href: "#FAQ" }
       ],
       cta: {
         text: "Unirme Ahora",
@@ -186,20 +190,26 @@ async function migrate() {
         {
           _key: 'v1',
           title: "Comunidad Real",
-          description: "Facilitamos encuentros reales en la naturaleza y en la vida cotidiana. Sin guías, construyendo entre todos.",
+          description: "Gereramos espacios que facilitan encuentros reales en la naturaleza y en la vida cotidiana con el aporte de cada integrante.",
           icon: "Users"
         },
         {
           _key: 'v2',
-          title: "Valores Claros",
-          description: "Respeto, Compromiso, Responsabilidad y Comunicación son los pilares que sostienen nuestro espacio.",
-          icon: "Heart"
+          title: "Actividades autogestivas",
+          description: "Formada por Residentes de Bariloche, donde cada salida la propone un miembro y cada uno es responsable de su seguridad y cuidado.",
+          icon: "Map"
         },
         {
           _key: 'v3',
-          title: "Autonomía",
-          description: "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos la montaña consciente.",
-          icon: "Mountain"
+          title: "Valores Claros",
+          description: "Funcionamos desde valores que cuidan el espacio: Respeto, Compromiso, Responsabilidad y Comunicación.",
+          icon: "Heart"
+        },
+        {
+          _key: 'v4',
+          title: "Autonomía responsable",
+          description: "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos el respeto entre Miembros y con la Naturaleza.",
+          icon: "Shield"
         }
       ],
       requirementsTitle: "¿Quiénes pueden sumarse?",
@@ -275,11 +285,14 @@ async function migrate() {
         "Te sumás a los grupos en los que quieras participar.",
         "Los miembros publican salidas y actividades: trekking, caminatas, mates, catas de vinos, encuentros y propuestas sociales.",
         "Vos elegís libremente a qué sumarte o incluso podés proponer tu propia actividad.",
-      ],
-      policies: [
         "Moderamos los grupos para que estén ordenados y no sean un caos de mensajes.",
         "Cuidamos el ambiente del grupo: si alguien no respeta normas o valores, puede ser removido.",
-        "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales.",
+        "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales."
+      ],
+      policies: [
+        "Moderamos los grupos para que solo recibas info relevante de las salidas.",
+        "La montaña es nuestra casa. Volvemos con la basura y respetamos la flora y fauna sin excepción.",
+        "No somos guías. Vos sos responsable de tu seguridad y equipo."
       ]
     };
 

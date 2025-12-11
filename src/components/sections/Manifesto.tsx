@@ -36,23 +36,40 @@ const Manifesto = () => {
 
   const rawValues = manifestoData?.values || [
     {
-      title: "Autogestión",
-      description: "Cada uno es responsable de su equipo y seguridad.",
-      icon: "UserCheck",
+      title: "Comunidad Real",
+      description:
+        "Gereramos espacios que facilitan encuentros reales en la naturaleza y en la vida cotidiana con el aporte de cada integrante.",
+      icon: "Users",
     },
     {
-      title: "Pertenencia",
-      description: "Exclusivo para residentes. Sin fines de lucro.",
-      icon: "Home", // Fallback, using Home or MapPin as requested
+      title: "Actividades autogestivas",
+      description:
+        "Formada por Residentes de Bariloche, donde cada salida la propone un miembro y cada uno es responsable de su seguridad y cuidado.",
+      icon: "Map",
     },
     {
-      title: "Respeto",
-      description: "Cuidamos el sendero y la buena onda del grupo.",
+      title: "Valores Claros",
+      description:
+        "Funcionamos desde valores que cuidan el espacio: Respeto, Compromiso, Responsabilidad y Comunicación.",
       icon: "Heart",
+    },
+    {
+      title: "Autonomía responsable",
+      description:
+        "Cada miembro es responsable de su seguridad, equipo y decisiones. Promovemos el respeto entre Miembros y con la Naturaleza.",
+      icon: "Shield",
     },
   ];
 
-  const values = rawValues;
+  const finalValues = (manifestoData?.values || rawValues).map((value) => {
+    if (value.title.includes("Actividades autogestivas")) {
+      return { ...value, icon: "Map" };
+    }
+    if (value.title.includes("Autonomía")) {
+      return { ...value, icon: "Shield" };
+    }
+    return value;
+  });
 
   return (
     <section
@@ -129,7 +146,7 @@ const Manifesto = () => {
         </div>
 
         <div className="relative z-10">
-          <ManifestoValues values={values} />
+          <ManifestoValues values={finalValues} />
         </div>
       </Container>
     </section>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Users, Compass, Shield } from "lucide-react";
+import { Heart, Users, Compass, Shield, Map as MapIcon } from "lucide-react";
 
 interface ValueItem {
   title: string;
@@ -14,34 +14,58 @@ interface ManifestoValuesProps {
 const getIcon = (iconName: string) => {
   switch (iconName) {
     case "Users":
-      return <Users size={20} />;
+      return <Users size={24} />;
     case "Heart":
-      return <Heart size={20} />;
-    case "Mountain": // Keep for backward compat if needed
-      return <Compass size={20} />;
+      return <Heart size={24} />;
+    case "Map":
+      return <MapIcon size={24} />;
     case "Compass":
-      return <Compass size={20} />;
+      return <Compass size={24} />;
     case "Shield":
-      return <Shield size={20} />;
+      return <Shield size={24} />;
     default:
-      return <Users size={20} />;
+      return <Users size={24} />;
   }
 };
 
-const getIconStyles = (iconName: string) => {
+const getTheme = (iconName: string) => {
   switch (iconName) {
     case "Users":
-      return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
-    case "Heart":
-      return "bg-bari-orange/10 text-bari-orange group-hover:bg-bari-orange";
-    case "Mountain":
-      return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
+      return {
+        cardBg: "bg-[#F2F9F6]", // Very light teal
+        borderColor: "border-[#2F5233]/10",
+        iconBg: "bg-[#2F5233]/10",
+        iconColor: "text-[#2F5233]",
+      };
+    case "Map":
     case "Compass":
-      return "bg-blue-500/10 text-blue-500 group-hover:bg-blue-500";
+      return {
+        cardBg: "bg-blue-50",
+        borderColor: "border-blue-100",
+        iconBg: "bg-blue-100",
+        iconColor: "text-blue-600",
+      };
+    case "Heart":
+      return {
+        cardBg: "bg-rose-50",
+        borderColor: "border-rose-100",
+        iconBg: "bg-rose-100",
+        iconColor: "text-rose-600",
+      };
     case "Shield":
-      return "bg-bari-gold/10 text-bari-gold group-hover:bg-bari-gold";
+      return {
+        cardBg: "bg-amber-50",
+        borderColor: "border-amber-100",
+        iconBg: "bg-amber-100",
+        iconColor: "text-amber-600",
+      };
     default:
-      return "bg-bari-teal/10 text-bari-teal group-hover:bg-bari-teal";
+      return {
+        cardBg: "bg-gray-50",
+        borderColor: "border-gray-100",
+        iconBg: "bg-gray-100",
+        iconColor: "text-gray-600",
+      };
   }
 };
 
@@ -62,38 +86,6 @@ const itemVariants = {
   },
 };
 
-const getBlobStyles = (iconName: string) => {
-  switch (iconName) {
-    case "Users":
-      return "bg-bari-teal";
-    case "Heart":
-      return "bg-bari-orange";
-    case "Mountain":
-    case "Compass":
-      return "bg-blue-500";
-    case "Shield":
-      return "bg-bari-gold";
-    default:
-      return "bg-bari-teal";
-  }
-};
-
-const getCardStyles = (iconName: string) => {
-  switch (iconName) {
-    case "Users":
-      return "hover:border-bari-teal/30 hover:shadow-bari-teal/10";
-    case "Heart":
-      return "hover:border-bari-orange/30 hover:shadow-bari-orange/10";
-    case "Mountain":
-    case "Compass":
-      return "hover:border-blue-500/30 hover:shadow-blue-500/10";
-    case "Shield":
-      return "hover:border-bari-gold/30 hover:shadow-bari-gold/10";
-    default:
-      return "hover:border-bari-teal/30 hover:shadow-bari-teal/10";
-  }
-};
-
 export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
   return (
     <motion.div
@@ -104,43 +96,34 @@ export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
       className="flex md:grid md:grid-cols-2 gap-4 md:gap-8 mb-24 overflow-x-auto snap-x snap-mandatory pb-6 pr-4 [&::-webkit-scrollbar]:hidden"
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
-      {values.map((value, index) => (
-        <motion.div
-          key={index}
-          variants={itemVariants}
-          className={`min-w-[85vw] snap-center md:min-w-0 group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-lg transition-all duration-300 overflow-hidden ${getCardStyles(
-            value.icon
-          )}`}
-        >
-          {/* Gradient Blob for subtle background effect on hover */}
-          <div
-            className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl pointer-events-none ${getBlobStyles(
-              value.icon
-            )}`}
-          />
+      {values.map((value, index) => {
+        const theme = getTheme(value.icon);
+        return (
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            whileHover={{ y: -8, scale: 1.02 }}
+            className={`min-w-[85vw] snap-center md:min-w-0 group relative rounded-3xl p-8 border shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${theme.cardBg} ${theme.borderColor}`}
+          >
+            <div className="flex flex-col items-center text-center space-y-4 relative z-10">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <div
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-300 ${theme.iconBg} ${theme.iconColor}`}
+                >
+                  {getIcon(value.icon)}
+                </div>
+                <h3 className="text-2xl font-heading font-bold text-bari-dark">
+                  {value.title}
+                </h3>
+              </div>
 
-          <div className="flex flex-col items-center text-center space-y-4 relative z-10">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <motion.div
-                className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-sm group-hover:shadow-md group-hover:text-white ${getIconStyles(
-                  value.icon
-                )}`}
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {getIcon(value.icon)}
-              </motion.div>
-              <h3 className="text-2xl font-heading font-bold text-bari-dark">
-                {value.title}
-              </h3>
+              <p className="text-bari-slate text-lg leading-relaxed">
+                {value.description}
+              </p>
             </div>
-
-            <p className="text-bari-slate text-lg leading-relaxed">
-              {value.description}
-            </p>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        );
+      })}
     </motion.div>
   );
 };

@@ -23,7 +23,7 @@ export const manifesto = defineType({
               name: 'icon',
               title: 'Icono',
               type: 'string',
-              options: { list: ['Users', 'Heart', 'Mountain'] },
+              options: { list: ['Users', 'Heart', 'Mountain', 'Map', 'Shield'] },
             }),
           ],
         },
