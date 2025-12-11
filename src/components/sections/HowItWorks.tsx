@@ -217,7 +217,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
                       <div className="w-16 h-16 rounded-2xl bg-bari-teal/10 text-bari-teal flex items-center justify-center group-hover:bg-bari-teal group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
                         <Icon size={32} />
                       </div>
-                      <p className="text-bari-slate font-medium leading-relaxed">
+                      <p className="text-bari-slate font-bold leading-relaxed">
                         {step}
                       </p>
                     </div>
