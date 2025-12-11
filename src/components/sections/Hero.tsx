@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Container } from "../layout/Container";
 import { useSanity } from "../../hooks/useSanity";
 import { urlFor } from "../../lib/sanity";
+// import logoSrc from "../../assets/images/btLogo.webp";
+import { Button } from "../ui/Button";
 
 interface HeroData {
   title: string;
@@ -28,42 +30,39 @@ const Hero = () => {
   // Default values while loading or if no data
   const subtitle =
     heroData?.subtitle ||
-    "Somos residentes de Bariloche creando un espacio para encontrarnos, caminar y compartir experiencias.";
+    "Somos residentes de Bariloche creando un espacio para encontrarnos, compartiendo senderos y experiencias que nos hacen bien.";
   const bgImage = heroData?.backgroundImage
     ? urlFor(heroData.backgroundImage).width(1920).url()
     : "/realHero.webp";
 
-  // Function to render title with line breaks if it contains them, or custom logic
+  // Simplified renderTitle for better mobile flow
   const renderTitle = () => {
+    const titleText =
+      heroData?.title ||
+      "Comunidad de Montaña. De residentes, para residentes.";
+
     if (!heroData?.title) {
       return (
-        <>
-          <span className="text-bari-orange drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-            CONECTAR
+        <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase">
+          Comunidad de Montaña. <br />
+          <span className="text-bari-orange">
+            De residentes, para residentes.
           </span>
-          <br />
-          COMPARTIR
-          <br />
-          SER COMUNIDAD
-        </>
+        </span>
       );
     }
 
-    const words = heroData.title.split(" ");
     return (
-      <>
-        <span className="text-bari-orange drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-          {words[0]}
-        </span>
-        {words.length > 1 && " " + words.slice(1).join(" ")}
-      </>
+      <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase">
+        {titleText}
+      </span>
     );
   };
 
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -80,7 +79,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="space-y-8 max-w-4xl mx-auto"
+          className="space-y-4 md:space-y-8 max-w-4xl mx-auto flex flex-col items-center"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -91,17 +90,24 @@ const Hero = () => {
             <img
               src={logoSrc}
               alt="Bari Trekking Logo"
-              className="w-40 md:w-40 lg:w-56 drop-shadow-2xl"
+              className="w-28 md:w-56 drop-shadow-2xl"
             />
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight">
+          <h1 className="text-3xl md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight">
             {renderTitle()}
           </h1>
 
-          <p className=" drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
+          <p className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-lg md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
             {subtitle}
           </p>
+
+          <Button
+            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w-full md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105"
+            onClick={() => (window.location.href = "#groups")}
+          >
+            Sumate si vivís acá
+          </Button>
         </motion.div>
       </Container>
     </section>

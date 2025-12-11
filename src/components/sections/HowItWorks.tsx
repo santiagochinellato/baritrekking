@@ -9,6 +9,7 @@ import { ShieldCheck, Leaf, UserCheck, Info } from "lucide-react";
 
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 interface HowItWorksData {
   title: string;

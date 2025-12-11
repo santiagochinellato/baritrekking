@@ -101,14 +101,14 @@ export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-24"
+      className="flex md:grid md:grid-cols-2 gap-4 md:gap-8 mb-24 overflow-x-auto snap-x snap-mandatory pb-6 pr-4 [&::-webkit-scrollbar]:hidden"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
       {values.map((value, index) => (
         <motion.div
           key={index}
           variants={itemVariants}
-          whileHover={{ y: -8, scale: 1.02 }}
-          className={`group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-lg transition-all duration-300 overflow-hidden ${getCardStyles(
+          className={`min-w-[85vw] snap-center md:min-w-0 group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-lg transition-all duration-300 overflow-hidden ${getCardStyles(
             value.icon
           )}`}
         >
