@@ -54,8 +54,8 @@ const Requirements = () => {
           className="relative bg-gradient-to-br from-bari-teal/5 via-white to-bari-orange/5 rounded-3xl p-8 md:p-12 border-2 border-bari-teal/20 shadow-xl"
         >
           {/* Badge */}
-          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(50%-4rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-            ⚠️ Requisitos Importantes
+          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(40%-2rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-md md:text-[22px] font-bold shadow-lg ">
+            ⚠️ Requisitos para sumarte
           </div>
 
           <div className="flex flex-col md:flex-row gap-8 items-center mt-4">

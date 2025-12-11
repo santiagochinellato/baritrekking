@@ -37,7 +37,7 @@ export const SocialCard = ({ data }: SocialCardProps) => {
           <CardHeader className="p-0 pb-4">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start items-start mb-3 gap-3">
               <div className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2">
-                <span className="text-base sm:text-lg">✨</span>
+                <span className="text-base sm:text-lg">🚀</span>
                 <span>{data.badge}</span>
               </div>
             </div>
