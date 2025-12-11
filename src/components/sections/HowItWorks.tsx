@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useSanity } from "../../hooks/useSanity";
+import { ShieldCheck, Leaf, UserCheck, Info } from "lucide-react";
 
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -13,10 +14,12 @@ interface HowItWorksData {
   title: string;
   subtitle: string;
   steps: string[];
+  policies?: string[];
 }
 
 interface HowItWorksProps {
   steps?: string[];
+  policies?: string[];
 }
 
 const stepsList = [
@@ -28,6 +31,8 @@ const stepsList = [
   "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales.",
 ];
 
+const POLICY_ICONS = [UserCheck, Leaf, ShieldCheck, Info];
+
 const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -36,9 +41,12 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
   const title = data?.title || "El Sendero";
   const subtitle =
     data?.subtitle || "Cómo funciona nuestra comunidad, paso a paso.";
-  const stepsToRender = data?.steps || steps;
 
-  // Generate Path for Straight Vertical Line
+  // Use data from Sanity if available (with separate fields), otherwise use manual split of fallback
+  const journeySteps = data?.steps || steps.slice(0, 6);
+  const policySteps = data?.policies || steps.slice(6);
+
+  // Generate Path for Straight Vertical Line - Only for journey steps
   const generatePath = () => {
     return `M 50 0 L 50 100`;
   };
@@ -64,7 +72,6 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
           start: "top 80%", // Start when container hits 80% viewport
           end: "bottom 80%", // End when bottom hits 80%
           scrub: 1, // Smooth dragging
-          // markers: true, // Uncomment for debug
         },
       });
 
@@ -95,7 +102,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
         );
       });
     },
-    { scope: containerRef, dependencies: [stepsToRender] }
+    { scope: containerRef, dependencies: [journeySteps] }
   );
 
   return (
@@ -110,7 +117,8 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
             <div className="w-24 h-1 bg-bari-orange mx-auto rounded-full mt-6" />
           </div>
 
-          <div className="relative lg:min-h-[800px]">
+          {/* SECTION 1: TIMELINE (Journey) */}
+          <div className="relative lg:min-h-[800px] mb-24">
             {/* SVG Trail Container (Desktop Only >= 1024px) */}
             <div className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block">
               <svg
@@ -142,7 +150,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
 
             {/* Items Grid */}
             <div className="grid grid-cols-1 gap-6 lg:gap-0 relative z-10 space-y-8 lg:space-y-0">
-              {stepsToRender.map((step, index) => {
+              {journeySteps.map((step, index) => {
                 const isEven = index % 2 === 0;
                 return (
                   <div
@@ -189,6 +197,34 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
               })}
             </div>
           </div>
+
+          {/* SECTION 2: POLITIQUES (Policies) */}
+          {policySteps.length > 0 && (
+            <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/60 shadow-lg">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-dark text-center mb-10">
+                Lo que tenés que saber antes de sumarte
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {policySteps.map((step, index) => {
+                  const Icon = POLICY_ICONS[index % POLICY_ICONS.length];
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center text-center space-y-4 group"
+                    >
+                      <div className="w-16 h-16 rounded-2xl bg-bari-teal/10 text-bari-teal flex items-center justify-center group-hover:bg-bari-teal group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
+                        <Icon size={32} />
+                      </div>
+                      <p className="text-bari-slate font-medium leading-relaxed">
+                        {step}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </Container>
     </section>

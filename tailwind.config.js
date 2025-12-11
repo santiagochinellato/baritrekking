@@ -10,6 +10,7 @@ export default {
         bari: {
           teal: '#2F5233',      // Forest Green: Naturaleza profunda
           dark: '#1e293b',      // Slate 800: Texto principal
+          darkgreen: '#25424c',
           orange: '#E07A5F',    // Terracotta: Calidez
           gold: '#f5a941',      // Mantener para detalles premium
           cream: '#f8fafc',     // Slate 50: Fondo limpio

@@ -4,28 +4,28 @@ import { ShieldCheck } from "lucide-react";
 import { Button } from "../ui/Button";
 import { useSanity } from "../../hooks/useSanity";
 
-interface RequirementsData {
-  title: string;
-  intro: string;
-  list: string[];
+interface RequirementsSourceData {
+  requirementsTitle: string;
+  requirementsIntro: string;
+  requirementsList: string[];
   ctaText?: string;
   ctaLink?: string;
 }
 
 const Requirements = () => {
-  const { data: requirementsData } = useSanity<RequirementsData>(
-    `*[_type == "requirements"][0]`
+  const { data: sourceData } = useSanity<RequirementsSourceData>(
+    `*[_type == "manifesto"][0]`
   );
 
   // Fallback to previous Manifesto data query if specific type doesn't exist yet,
   // or just use defaults matching the previous file.
   // For now using the same defaults as in Manifesto.
 
-  const title = requirementsData?.title || "¿Quiénes pueden sumarse?";
+  const title = sourceData?.requirementsTitle || "¿Quiénes pueden sumarse?";
   const intro =
-    requirementsData?.intro ||
+    sourceData?.requirementsIntro ||
     "Para mantener la esencia de nuestro grupo, tenemos algunos requisitos simples pero fundamentales:";
-  const list = requirementsData?.list || [
+  const list = sourceData?.requirementsList || [
     "Vivir en Bariloche o Dina Huapi",
     "Respetar normas de convivencia y cuidado mutuo",
     "Cuidar el entorno y no dejar rastro",
@@ -33,8 +33,8 @@ const Requirements = () => {
     "Aportar buena energía y ganas de participar",
   ];
   const ctaText =
-    requirementsData?.ctaText || "¿Cumplís los requisitos? Sumate Ahora";
-  const ctaLink = requirementsData?.ctaLink || "#";
+    sourceData?.ctaText || "¿Cumplís los requisitos? Sumate Ahora";
+  const ctaLink = sourceData?.ctaLink || "#";
 
   return (
     <section
@@ -58,7 +58,7 @@ const Requirements = () => {
             ⚠️ Requisitos Importantes
           </div>
 
-          <div className="flex flex-col md:flex-row gap-12 items-center mt-4">
+          <div className="flex flex-col md:flex-row gap-8 items-center mt-4">
             <div className="flex-1 space-y-6">
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark text-center lg:text-left">
                 {title}

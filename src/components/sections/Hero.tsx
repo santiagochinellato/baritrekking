@@ -72,7 +72,7 @@ const Hero = () => {
           alt="Comunidad Bari.Trekking"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bari-teal/90 via-bari-teal/20 to-bari-teal/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bari-darkgreen/90 via-bari-darkgreen/20 to-bari-darkgreen/50" />
       </div>
 
       <Container className="relative z-10 text-center px-4">

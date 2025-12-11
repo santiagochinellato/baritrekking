@@ -103,7 +103,7 @@ async function migrate() {
         { _key: 's1', platform: "instagram", url: "https://www.instagram.com/bari.trekking" },
         { _key: 's2', platform: "whatsapp", url: "https://wa.me/5492944123456" },
       ],
-      followText: "Seguinos en Instagram para ver fotos de nuestras salidas",
+      followText: "Seguinos en Instagram para explorar nuestras salidas",
       copyrightText: `© ${new Date().getFullYear()} Bari.Trekking. Todos los derechos reservados.`,
       developer: {
         name: "Santiago Chinellato",
@@ -146,7 +146,7 @@ async function migrate() {
           { _key: 's4', label: "Cursos", value: "10", icon: "GraduationCap" },
           { _key: 's5', label: "Acciones", value: "8", icon: "Heart" },
         ],
-        buttonText: "Unirme al Grupo",
+        buttonText: "Sumarme a las Salidas",
         buttonLink: "#"
       },
       socialCard: {
@@ -160,7 +160,7 @@ async function migrate() {
           { _key: 'b3', name: "Bari.Bienestar", emoji: "🧘🏻‍♀️", desc: "Yoga y meditación" },
           { _key: 'b4', name: "Bari.Red", emoji: "🤝", desc: "Red de apoyo" },
         ],
-        buttonText: "Acceder Ahora",
+        buttonText: "Quiero mi Membresía",
         buttonLink: "#"
       },
       preventionCard: {
@@ -261,7 +261,7 @@ async function migrate() {
       _id: 'communityCTA-singleton',
       title: "¿Listo para ser parte?",
       description: "Sumate a la comunidad más social y hermosa de Bariloche.",
-      buttonText: "Registrate en el sitio",
+      buttonText: "Quiero ser parte",
       buttonLink: "#"
     };
 
@@ -275,6 +275,8 @@ async function migrate() {
         "Te sumás a los grupos en los que quieras participar.",
         "Los miembros publican salidas y actividades: trekking, caminatas, mates, catas de vinos, encuentros y propuestas sociales.",
         "Vos elegís libremente a qué sumarte o incluso podés proponer tu propia actividad.",
+      ],
+      policies: [
         "Moderamos los grupos para que estén ordenados y no sean un caos de mensajes.",
         "Cuidamos el ambiente del grupo: si alguien no respeta normas o valores, puede ser removido.",
         "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales.",

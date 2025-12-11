@@ -14,17 +14,17 @@ interface ManifestoValuesProps {
 const getIcon = (iconName: string) => {
   switch (iconName) {
     case "Users":
-      return <Users size={40} />;
+      return <Users size={20} />;
     case "Heart":
-      return <Heart size={40} />;
+      return <Heart size={20} />;
     case "Mountain": // Keep for backward compat if needed
-      return <Compass size={40} />;
+      return <Compass size={20} />;
     case "Compass":
-      return <Compass size={40} />;
+      return <Compass size={20} />;
     case "Shield":
-      return <Shield size={40} />;
+      return <Shield size={20} />;
     default:
-      return <Users size={40} />;
+      return <Users size={20} />;
   }
 };
 
@@ -62,6 +62,38 @@ const itemVariants = {
   },
 };
 
+const getBlobStyles = (iconName: string) => {
+  switch (iconName) {
+    case "Users":
+      return "bg-bari-teal";
+    case "Heart":
+      return "bg-bari-orange";
+    case "Mountain":
+    case "Compass":
+      return "bg-blue-500";
+    case "Shield":
+      return "bg-bari-gold";
+    default:
+      return "bg-bari-teal";
+  }
+};
+
+const getCardStyles = (iconName: string) => {
+  switch (iconName) {
+    case "Users":
+      return "hover:border-bari-teal/30 hover:shadow-bari-teal/10";
+    case "Heart":
+      return "hover:border-bari-orange/30 hover:shadow-bari-orange/10";
+    case "Mountain":
+    case "Compass":
+      return "hover:border-blue-500/30 hover:shadow-blue-500/10";
+    case "Shield":
+      return "hover:border-bari-gold/30 hover:shadow-bari-gold/10";
+    default:
+      return "hover:border-bari-teal/30 hover:shadow-bari-teal/10";
+  }
+};
+
 export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
   return (
     <motion.div
@@ -69,26 +101,44 @@ export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24"
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-24"
     >
       {values.map((value, index) => (
         <motion.div
           key={index}
           variants={itemVariants}
-          whileHover={{ scale: 1.05, y: -5 }}
-          className="text-center space-y-4 group cursor-pointer"
+          whileHover={{ y: -8, scale: 1.02 }}
+          className={`group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-lg transition-all duration-300 overflow-hidden ${getCardStyles(
+            value.icon
+          )}`}
         >
-          <motion.div
-            className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center transition-all group-hover:text-white group-hover:shadow-lg ${getIconStyles(
+          {/* Gradient Blob for subtle background effect on hover */}
+          <div
+            className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl pointer-events-none ${getBlobStyles(
               value.icon
             )}`}
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
-          >
-            {getIcon(value.icon)}
-          </motion.div>
-          <h3 className="text-xl font-bold text-bari-dark ">{value.title}</h3>
-          <p className="text-bari-slate">{value.description}</p>
+          />
+
+          <div className="flex flex-col items-center text-center space-y-4 relative z-10">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <motion.div
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-sm group-hover:shadow-md group-hover:text-white ${getIconStyles(
+                  value.icon
+                )}`}
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {getIcon(value.icon)}
+              </motion.div>
+              <h3 className="text-2xl font-heading font-bold text-bari-dark">
+                {value.title}
+              </h3>
+            </div>
+
+            <p className="text-bari-slate text-lg leading-relaxed">
+              {value.description}
+            </p>
+          </div>
         </motion.div>
       ))}
     </motion.div>

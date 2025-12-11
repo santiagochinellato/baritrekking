@@ -72,7 +72,7 @@ const Footer = () => {
 
   const followText =
     footerData?.followText ||
-    "Seguinos en Instagram para ver fotos de nuestras salidas";
+    "Seguinos en Instagram para explorar nuestras salidas";
 
   const copyrightText =
     footerData?.copyrightText ||
@@ -125,7 +125,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="bg-bari-teal text-white pt-16 pb-8 border-t border-white/10"
+      className="bg-bari-darkgreen text-white pt-16 pb-8 border-t border-white/10"
     >
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

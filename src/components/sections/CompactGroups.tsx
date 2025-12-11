@@ -74,6 +74,8 @@ const CompactGroups = () => {
       { label: "Cursos", value: "10", icon: "GraduationCap" },
       { label: "Acciones", value: "8", icon: "Heart" },
     ],
+    buttonText: "Sumarme a las Salidas",
+    buttonLink: "#",
   };
 
   // Social Card Defaults
@@ -88,6 +90,8 @@ const CompactGroups = () => {
       { name: "Bari.Bienestar", emoji: "🧘🏻‍♀️", desc: "Yoga y meditación" },
       { name: "Bari.Red", emoji: "🤝", desc: "Red de apoyo" },
     ],
+    buttonText: "Quiero mi Membresía",
+    buttonLink: "#",
   };
 
   // Prevention Card Defaults
