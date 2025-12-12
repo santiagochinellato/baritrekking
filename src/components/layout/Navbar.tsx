@@ -25,6 +25,10 @@ interface NavbarData {
     text: string;
     link: string;
   };
+  cta2?: {
+    text: string;
+    link: string;
+  };
 }
 
 const Navbar = () => {
@@ -76,8 +80,15 @@ const Navbar = () => {
   const ctaText = navbarData?.cta?.text || "Unirme Ahora";
   const ctaLink = navbarData?.cta?.link || "#";
 
+  const cta2Text = navbarData?.cta2?.text || "Acceso miembros";
+  const cta2Link = navbarData?.cta2?.link || "#";
+
   const handleCTAClick = () => {
     window.location.href = ctaLink;
+  };
+
+  const handleCTA2Click = () => {
+    window.location.href = cta2Link;
   };
 
   return (
@@ -133,18 +144,32 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button
-              onClick={handleCTAClick}
-              className={cn(
-                "font-semibold shadow-lg transition-all",
-                isScrolled
-                  ? "bg-bari-orange hover:bg-bari-orange/90 text-white"
-                  : "bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30"
-              )}
-              size="sm"
-            >
-              {ctaText}
-            </Button>
+            <div className="px-14 flex gap-4">
+              <Button
+                onClick={handleCTAClick}
+                className={cn(
+                  "font-semibold shadow-lg transition-all",
+                  isScrolled
+                    ? "bg-bari-orange hover:bg-bari-orange/90 text-white"
+                    : "bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30"
+                )}
+                size="sm"
+              >
+                {ctaText}
+              </Button>
+              <Button
+                onClick={handleCTA2Click}
+                className={cn(
+                  "font-semibold shadow-lg transition-all",
+                  isScrolled
+                    ? "bg-bari-teal hover:bg-bari-teal/90 text-white"
+                    : "bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30"
+                )}
+                size="sm"
+              >
+                {cta2Text}
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -196,10 +221,10 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-4"
+                className="mt-4 flex flex-col gap-4"
               >
                 <Button
-                  className="w-full bg-bari-orange hover:bg-bari-orange/90 py-6 text-xl font-bold shadow-xl"
+                  className="w-full bg-bari-orange hover:bg-bari-orange/90 py-4 text-xl font-bold shadow-xl"
                   onClick={() => {
                     handleCTAClick();
                     setIsMobileMenuOpen(false);
@@ -207,6 +232,16 @@ const Navbar = () => {
                   size="lg"
                 >
                   {ctaText}
+                </Button>
+                <Button
+                  className="w-full bg-bari-teal hover:bg-bari-teal/90 py-4 text-xl font-bold shadow-xl"
+                  onClick={() => {
+                    handleCTA2Click();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  size="lg"
+                >
+                  {cta2Text}
                 </Button>
               </motion.div>
             </div>

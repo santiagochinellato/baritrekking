@@ -6,20 +6,26 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Main Title',
+      name: 'title1',
+      title: 'Título Parte 1 (Blanco)',
       type: 'string',
-      description: 'The main heading (e.g., CONECTAR COMPARTIR SER COMUNIDAD)',
+      description: 'Primera parte del título principal (ej. COMUNIDAD DE MONTAÑA.)',
+    }),
+    defineField({
+      name: 'title2',
+      title: 'Título Parte 2 (Naranja)',
+      type: 'string',
+      description: 'Segunda parte del título principal (ej. DE RESIDENTES, PARA RESIDENTES.)',
     }),
     defineField({
       name: 'subtitle',
-      title: 'Subtitle',
+      title: 'Subtítulo',
       type: 'text',
-      description: 'The descriptive text below the title',
+      description: 'Texto del subtítulo',
     }),
     defineField({
       name: 'backgroundImage',
-      title: 'Background Image',
+      title: 'Imagen de Fondo',
       type: 'image',
       options: {
         hotspot: true,
@@ -27,7 +33,7 @@ export default defineType({
     }),
     defineField({
       name: 'ctaText',
-      title: 'Button Text',
+      title: 'Texto del Botón',
       type: 'string',
       initialValue: 'Explorá la Comunidad',
     }),

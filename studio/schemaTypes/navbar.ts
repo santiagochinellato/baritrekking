@@ -61,5 +61,22 @@ export const navbar = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "cta2",
+      title: "Call to Action 2",
+      type: "object",
+      fields: [
+        defineField({
+          name: "text",
+          title: "Button Text",
+          type: "string",
+        }),
+        defineField({
+          name: "link",
+          title: "Button Link",
+          type: "string",
+        }),
+      ],
+    }),
   ],
 });

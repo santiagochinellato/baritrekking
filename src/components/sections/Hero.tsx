@@ -6,7 +6,8 @@ import { urlFor } from "../../lib/sanity";
 import { Button } from "../ui/Button";
 
 interface HeroData {
-  title: string;
+  title1: string;
+  title2: string;
   subtitle: string;
   backgroundImage: unknown;
 }
@@ -37,24 +38,13 @@ const Hero = () => {
 
   // Simplified renderTitle for better mobile flow
   const renderTitle = () => {
-    const titleText =
-      heroData?.title ||
-      "Comunidad de Montaña. De residentes, para residentes.";
-
-    if (!heroData?.title) {
-      return (
-        <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase">
-          Comunidad de Montaña. <br />
-          <span className="text-bari-orange">
-            De residentes, para residentes.
-          </span>
-        </span>
-      );
-    }
+    const title1 = heroData?.title1 || "Somos mucho más que Trekking.";
+    const title2 = heroData?.title2 || "Somos Comunidad.";
 
     return (
-      <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase">
-        {titleText}
+      <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase flex flex-col items-center">
+        <span className="text-bari-orange">{title1}</span>
+        <span className="text-bari-white">{title2}</span>
       </span>
     );
   };
@@ -79,7 +69,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="space-y-4 md:space-y-8 max-w-4xl mx-auto flex flex-col items-center"
+          className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -90,11 +80,11 @@ const Hero = () => {
             <img
               src={logoSrc}
               alt="Bari Trekking Logo"
-              className="w-28 md:w-56 drop-shadow-2xl"
+              className="w-48 md:w-56 drop-shadow-2xl"
             />
           </motion.div>
 
-          <h1 className="text-3xl md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight">
+          <h1 className="text-[26px] md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full">
             {renderTitle()}
           </h1>
 
@@ -102,12 +92,12 @@ const Hero = () => {
             {subtitle}
           </p>
 
-          {/* <Button
-            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w-full md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105 lg:hidden"
+          <Button
+            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105 lg:hidden"
             onClick={() => (window.location.href = "#groups")}
           >
             Sumate si vivís acá
-          </Button> */}
+          </Button>
         </motion.div>
       </Container>
     </section>
