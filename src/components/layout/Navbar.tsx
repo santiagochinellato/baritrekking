@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Container } from "./Container";
 import { cn } from "../../lib/utils";
 import { client, urlFor } from "../../lib/sanity";
+import { useEffect, useState } from "react";
 
 interface NavbarData {
   logo?: {
@@ -41,6 +46,18 @@ const Navbar = () => {
     fetchNavbarData();
   }, []);
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
   });
@@ -73,7 +90,7 @@ const Navbar = () => {
         isScrolled
           ? "backdrop-blur-md bg-white/90 shadow-md py-3"
           : "bg-transparent py-4",
-        isMobileMenuOpen ? "bg-white/95 " : ""
+        isMobileMenuOpen ? "bg-transparent" : "" // Make transparent when menu open so full screen menu shows
       )}
     >
       <Container>
@@ -103,7 +120,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -133,14 +150,14 @@ const Navbar = () => {
           {/* Mobile Menu Toggle */}
           <button
             className={cn(
-              "md:hidden z-50 p-2 absolute right-4",
+              "lg:hidden z-50 p-2 absolute right-4",
               !isScrolled && "top-4"
             )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className={isScrolled ? "text-bari-dark" : ""} size={24} />
+              <X className="text-bari-dark" size={32} /> // Always dark on open menu
             ) : (
               <Menu
                 className={isScrolled ? "text-bari-dark" : "text-white"}
@@ -152,37 +169,50 @@ const Navbar = () => {
       </Container>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="absolute  h-[calc(100vh-4rem)] left-0 right-0 backdrop-blur-xl bg-white/95 shadow-2xl  md:hidden"
-        >
-          <div className="flex flex-col gap-1 p-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-bari-dark font-semibold text-lg hover:text-bari-teal py-3 px-4 rounded-lg hover:bg-bari-cream/50 transition-all"
-                onClick={() => setIsMobileMenuOpen(false)}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center lg:hidden"
+          >
+            <div className="flex flex-col gap-6 p-6 w-full max-w-sm text-center">
+              {navLinks.map((link, index) => (
+                <motion.a
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  href={link.href}
+                  className="text-bari-dark font-heading font-bold text-3xl hover:text-bari-orange transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-4"
               >
-                {link.name}
-              </a>
-            ))}
-            <Button
-              className="w-full bg-bari-orange hover:bg-bari-orange/90 mt-4 py-6 text-lg font-bold"
-              onClick={() => {
-                handleCTAClick();
-                setIsMobileMenuOpen(false);
-              }}
-              size="lg"
-            >
-              {ctaText}
-            </Button>
-          </div>
-        </motion.div>
-      )}
+                <Button
+                  className="w-full bg-bari-orange hover:bg-bari-orange/90 py-6 text-xl font-bold shadow-xl"
+                  onClick={() => {
+                    handleCTAClick();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  size="lg"
+                >
+                  {ctaText}
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };

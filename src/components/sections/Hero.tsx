@@ -103,7 +103,7 @@ const Hero = () => {
           </p>
 
           <Button
-            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w-full md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105"
+            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w-full md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105 lg:hidden"
             onClick={() => (window.location.href = "#groups")}
           >
             Sumate si vivís acá
