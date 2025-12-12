@@ -9,10 +9,12 @@ import { SocialWall } from "./components/sections/SocialWall";
 import { FAQ } from "./components/sections/FAQ";
 import { CommunityCTA } from "./components/sections/CommunityCTA";
 import { FloatingCTA } from "./components/ui/FloatingCTA";
+import { LoadingScreen } from "./components/ui/LoadingScreen";
 import { HelmetProvider } from "react-helmet-async";
 import { SEO } from "./components/seo/SEO";
 import { useEffect, useState } from "react";
 import { client, urlFor } from "./lib/sanity";
+import { AnimatePresence } from "framer-motion";
 
 interface SEOSettings {
   title?: string;
@@ -27,6 +29,7 @@ interface SEOSettings {
 
 function App() {
   const [seoSettings, setSeoSettings] = useState<SEOSettings | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSeoSettings = async () => {
@@ -38,6 +41,12 @@ function App() {
       }
     };
     fetchSeoSettings();
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const seoData = {
@@ -50,6 +59,11 @@ function App() {
   return (
     <HelmetProvider>
       <SEO {...seoData} />
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen isLoading={isLoading} key="loading-screen" />
+        )}
+      </AnimatePresence>
       <div className="min-h-screen bg-bari-cream flex flex-col font-sans">
         <Navbar />
         <main className="flex-grow">
