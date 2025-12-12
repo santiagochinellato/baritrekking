@@ -8,6 +8,7 @@ interface RequirementsSourceData {
   requirementsTitle: string;
   requirementsIntro: string;
   requirementsList: string[];
+  requirementsBadge?: string;
   ctaText?: string;
   ctaLink?: string;
 }
@@ -21,6 +22,8 @@ const Requirements = () => {
   // or just use defaults matching the previous file.
   // For now using the same defaults as in Manifesto.
 
+  const badgeText =
+    sourceData?.requirementsBadge || "⚠️ Requisitos para sumarte";
   const title = sourceData?.requirementsTitle || "¿Quiénes pueden sumarse?";
   const intro =
     sourceData?.requirementsIntro ||
@@ -39,7 +42,7 @@ const Requirements = () => {
   return (
     <section
       id="requisitos"
-      className="py-24 bg-white relative overflow-hidden"
+      className="py-24 bg-white relative overflow-hidden scroll-mt-32"
     >
       {/* Background decorative - maybe distinct from Manifesto */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-5">
@@ -54,8 +57,8 @@ const Requirements = () => {
           className="relative bg-gradient-to-br from-bari-teal/5 via-white to-bari-orange/5 rounded-3xl p-8 md:p-12 border-2 border-bari-teal/20 shadow-xl"
         >
           {/* Badge */}
-          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(40%-2rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-md md:text-[22px] font-bold shadow-lg ">
-            ⚠️ Requisitos para sumarte
+          <div className="absolute w-[calc(100%-4rem)] lg:w-[calc(40%-2rem)] text-center -top-4 left-1/2 -translate-x-1/2 bg-bari-orange text-white px-6 py-2 rounded-full text-md md:text-[18px] font-bold shadow-lg uppercase ">
+            {badgeText}
           </div>
 
           <div className="flex flex-col md:flex-row gap-8 items-center mt-4">

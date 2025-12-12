@@ -30,6 +30,13 @@ export const manifesto = defineType({
       ],
     }),
 
+
+    defineField({ 
+      name: 'requirementsBadge', 
+      title: 'Badge Requisitos', 
+      type: 'string', 
+      initialValue: '⚠️ Requisitos para sumarte' 
+    }),
     defineField({ name: 'requirementsTitle', title: 'Título Requisitos', type: 'string' }),
     defineField({ name: 'requirementsIntro', title: 'Intro Requisitos', type: 'text' }),
     defineField({

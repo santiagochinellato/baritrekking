@@ -59,7 +59,11 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                   duration: 2,
                   repeatType: "reverse",
                 }}
-                className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2"
+                style={{
+                  WebkitFontSmoothing: "antialiased",
+                  backfaceVisibility: "hidden",
+                }}
+                className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2 transform-gpu will-change-transform"
               >
                 <span className="text-base sm:text-lg">🎉</span>
                 <span>{data.badge}</span>

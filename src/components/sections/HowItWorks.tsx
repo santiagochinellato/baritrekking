@@ -107,7 +107,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
   );
 
   return (
-    <section id="#sendero" className="py-24 bg-bari-cream overflow-hidden">
+    <section id="how-it-works" className="py-24 bg-bari-cream overflow-hidden">
       <Container>
         <div className="max-w-6xl mx-auto" ref={containerRef}>
           <div className="text-center mb-24 relative z-10">
@@ -201,8 +201,8 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
 
           {/* SECTION 2: POLITIQUES (Policies) */}
           {policySteps.length > 0 && (
-            <div className="mt-12 bg-orange-50 rounded-3xl p-8 md:p-12 border border-white/60 shadow-lg">
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-dark text-center mb-10">
+            <div className="mt-12 bg-bari-orange/70 rounded-3xl p-8 md:p-12 border border-white/60 shadow-lg">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-white text-center mb-10 drop-shadow-lg">
                 Lo que tenés que saber antes de sumarte
               </h3>
 
@@ -214,10 +214,10 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
                       key={index}
                       className="flex flex-col items-center text-center space-y-4 group"
                     >
-                      <div className="w-16 h-16 rounded-2xl bg-bari-teal/10 text-bari-teal flex items-center justify-center group-hover:bg-bari-teal group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
+                      <div className="w-16 h-16 rounded-2xl bg-bari-white/100 text-bari-orange flex items-center justify-center group-hover:bg-bari-white/100 group-hover:text-bari-orange transition-all duration-300 shadow-sm group-hover:shadow-md">
                         <Icon size={32} />
                       </div>
-                      <p className="text-bari-slate font-bold leading-relaxed">
+                      <p className="text-bari-white font-bold leading-relaxed  drop-shadow-lg">
                         {step}
                       </p>
                     </div>
