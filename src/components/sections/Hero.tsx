@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Container } from "../layout/Container";
 import { useSanity } from "../../hooks/useSanity";
 import { urlFor } from "../../lib/sanity";
@@ -20,7 +20,11 @@ interface NavbarData {
   };
 }
 
-const Hero = () => {
+interface HeroProps {
+  isLoading?: boolean;
+}
+
+const Hero = ({ isLoading = false }: HeroProps) => {
   const { data: heroData } = useSanity<HeroData>(`*[_type == "hero"][0]`);
   const { data: navbarData } = useSanity<NavbarData>(`*[_type == "navbar"][0]`);
 
@@ -36,18 +40,37 @@ const Hero = () => {
     ? urlFor(heroData.backgroundImage).width(1920).url()
     : "/realHero.webp";
 
-  // Simplified renderTitle for better mobile flow
-  const renderTitle = () => {
-    const title1 = heroData?.title1 || "Somos mucho más que Trekking.";
-    const title2 = heroData?.title2 || "Somos Comunidad.";
-
-    return (
-      <span className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] uppercase flex flex-col items-center">
-        <span className="text-bari-orange">{title1}</span>
-        <span className="text-bari-white">{title2}</span>
-      </span>
-    );
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
   };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+  const titleWrapperVariants: Variants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Stagger between title lines
+      },
+    },
+  };
+
+  const title1 = heroData?.title1 || "Somos mucho más que Trekking.";
+  const title2 = heroData?.title2 || "Somos Comunidad.";
 
   return (
     <section
@@ -66,15 +89,13 @@ const Hero = () => {
 
       <Container className="relative z-10 text-center px-4">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isLoading ? "hidden" : "visible"}
           className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center"
         >
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            variants={itemVariants}
             className="flex justify-center mb-6"
           >
             <img
@@ -84,20 +105,33 @@ const Hero = () => {
             />
           </motion.div>
 
-          <h1 className="text-[26px] md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full">
-            {renderTitle()}
-          </h1>
-
-          <p className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-lg md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed">
-            {subtitle}
-          </p>
-
-          <Button
-            className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg transition-transform hover:scale-105 lg:hidden"
-            onClick={() => (window.location.href = "#groups")}
+          <motion.h1
+            variants={titleWrapperVariants}
+            className="text-[26px] md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full flex flex-col items-center uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
           >
-            Sumate si vivís acá
-          </Button>
+            <motion.span variants={itemVariants} className="text-bari-orange">
+              {title1}
+            </motion.span>
+            <motion.span variants={itemVariants} className="text-bari-white">
+              {title2}
+            </motion.span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-lg md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed"
+          >
+            {subtitle}
+          </motion.p>
+
+          <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
+            <Button
+              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden"
+              onClick={() => (window.location.href = "#groups")}
+            >
+              Sumate si vivís acá
+            </Button>
+          </motion.div>
         </motion.div>
       </Container>
     </section>

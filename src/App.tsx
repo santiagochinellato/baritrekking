@@ -67,7 +67,7 @@ function App() {
       <div className="min-h-screen bg-bari-cream flex flex-col font-sans">
         <Navbar />
         <main className="flex-grow">
-          <Hero />
+          <Hero isLoading={isLoading} />
           <Manifesto />
           <Requirements />
           <HowItWorks />
