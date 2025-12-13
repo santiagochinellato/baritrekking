@@ -106,6 +106,74 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
     { scope: containerRef, dependencies: [journeySteps] }
   );
 
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray(".policy-card");
+      if (!cards.length) return;
+
+      gsap.fromTo(
+        cards,
+        {
+          y: 40,
+          autoAlpha: 0, // Handles opacity + visibility
+        },
+        {
+          scrollTrigger: {
+            trigger: ".policies-grid",
+            start: "top 85%", // Trigger a bit earlier to ensure visibility
+          },
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+          clearProps: "all", // Clear inline styles after animation to allow CSS hover effects
+        }
+      );
+    },
+    { scope: containerRef, dependencies: [policySteps] }
+  );
+
+  useGSAP(
+    () => {
+      const container = document.querySelector(".policy-container");
+      if (!container) return;
+
+      gsap.to(container, {
+        boxShadow: "0px 0px 35px 5px rgba(224, 122, 95, 0.5)",
+        repeat: -1,
+        yoyo: true,
+        duration: 2,
+        ease: "sine.inOut",
+      });
+    },
+    { scope: containerRef, dependencies: [policySteps] }
+  );
+
+  useGSAP(
+    () => {
+      const icons = gsap.utils.toArray(".policy-icon-anim");
+      if (!icons.length) return;
+
+      // Create a infinite timeline with a delay between repetitions
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 5 });
+
+      tl.to(icons, {
+        scale: 1.15,
+        y: -5, // Move up slightly instead of rotating to avoid tilt issues
+        duration: 0.5,
+        ease: "power2.out",
+        yoyo: true,
+        repeat: 1, // Pulse (up and down)
+        stagger: {
+          each: 0.2,
+          from: "start",
+        },
+      });
+    },
+    { scope: containerRef, dependencies: [policySteps] }
+  );
+
   return (
     <section id="how-it-works" className="py-24 bg-bari-cream overflow-hidden">
       <Container>
@@ -201,23 +269,25 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
 
           {/* SECTION 2: POLITIQUES (Policies) */}
           {policySteps.length > 0 && (
-            <div className="mt-12 bg-bari-orange/70 rounded-3xl p-8 md:p-12 border border-white/60 shadow-lg">
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-white text-center mb-10 drop-shadow-lg">
+            <div className="mt-12 bg-bari-white rounded-3xl p-8 md:p-12 border border-white/60 shadow-xl policy-container">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-darkgreen drop-shadow-lg text-center mb-10">
                 Lo que tenés que saber antes de sumarte
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="policies-grid grid grid-cols-1 md:grid-cols-3 gap-8">
                 {policySteps.map((step, index) => {
                   const Icon = POLICY_ICONS[index % POLICY_ICONS.length];
                   return (
                     <div
                       key={index}
-                      className="flex flex-col items-center text-center space-y-4 group"
+                      className="policy-card flex flex-col items-center text-center space-y-4 group p-6 rounded-2xl bg-white/40 hover:bg-white  hover:shadow-xl hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-300 "
                     >
-                      <div className="w-16 h-16 rounded-2xl bg-bari-white/100 text-bari-orange flex items-center justify-center group-hover:bg-bari-white/100 group-hover:text-bari-orange transition-all duration-300 shadow-sm group-hover:shadow-md">
-                        <Icon size={32} />
+                      <div className="policy-icon-anim">
+                        <div className="w-16 h-16 rounded-2xl bg-bari-orange text-bari-white flex items-center justify-center group-hover:scale-110 group-hover:bg-bari-orange group-hover:text-white transition-transform duration-300 shadow-sm group-hover:shadow-md">
+                          <Icon size={32} />
+                        </div>
                       </div>
-                      <p className="text-bari-white font-bold leading-relaxed  drop-shadow-lg">
+                      <p className="text-bari-darkgreen font-bold leading-relaxed drop-shadow-sm">
                         {step}
                       </p>
                     </div>
