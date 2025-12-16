@@ -139,7 +139,7 @@ const Manifesto = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-lg md:text-xl text-bari-slate/80 mt-6 leading-relaxed max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-bari-slate/80 mt-6 leading-relaxed max-w-3xl mx-auto"
           >
             {description}
           </motion.p>
