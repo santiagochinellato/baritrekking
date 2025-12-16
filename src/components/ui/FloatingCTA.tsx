@@ -15,7 +15,7 @@ const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { data: navbarData } = useSanity<NavbarData>(`*[_type == "navbar"][0]`);
 
-  const ctaText = navbarData?.cta?.text || "";
+  // const ctaText = navbarData?.cta?.text || "";
   const ctaLink = navbarData?.cta?.link || "#";
 
   useEffect(() => {
