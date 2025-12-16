@@ -50,7 +50,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
 
         <div className="relative z-10 h-full flex flex-col text-white p-6 md:p-8">
           <CardHeader className="p-0 pb-4">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start items-center mb-3 gap-3">
+            <div className="flex flex-col sm:flex-row md:justify-between justify-center  items-center lg:items-start mb-3 gap-3">
               <motion.div
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
@@ -68,12 +68,12 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                 <span className="text-base sm:text-lg">🎉</span>
                 <span>{data.badge}</span>
               </motion.div>
-              <Mountain className="text-white/60 hidden sm:block" size={40} />
+              <Mountain className="text-white/60 hidden md:block" size={40} />
             </div>
-            <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 text-center sm:text-left">
+            <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 text-center md:text-left">
               {data.title}
             </CardTitle>
-            <p className="text-white/95 text-sm sm:text-base leading-relaxed text-center sm:text-left">
+            <p className="text-white/95 text-sm sm:text-base leading-relaxed text-center md:text-left">
               {data.description}
             </p>
           </CardHeader>
