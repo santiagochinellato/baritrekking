@@ -119,14 +119,14 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.p
             variants={itemVariants}
-            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-[18px] md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed text-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-[px] md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed text-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
           >
             {subtitle}
           </motion.p>
 
           <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
             <Button
-              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden"
+              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden mt-2"
               onClick={() => (window.location.href = "#manifesto")}
             >
               <p className="text-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
