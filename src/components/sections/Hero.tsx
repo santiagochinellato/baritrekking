@@ -117,7 +117,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
             </motion.span>
             <motion.span
               variants={itemVariants}
-              className="text-bari-white text-[26px]"
+              className="text-bari-white text-[32px]"
             >
               {title2}
             </motion.span>
