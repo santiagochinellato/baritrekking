@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Compass } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
 
@@ -34,12 +34,13 @@ export const SocialCard = ({ data }: SocialCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-br from-bari-gold/5 via-transparent to-bari-orange/5 pointer-events-none" />
 
         <div className="relative z-10 h-full flex flex-col p-6 md:p-8">
-          <CardHeader className="p-0 pb-4">
+          <CardHeader className="p-0 pb-4 flex justify-between">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start items-start mb-3 gap-3">
               <div className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2">
                 <span className="text-base sm:text-lg">🚀</span>
                 <span>{data.badge}</span>
               </div>
+              <Compass className="text-white/60 hidden sm:block" size={40} />
             </div>
             <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 text-left bg-gradient-to-r from-bari-gold via-amber-300 to-bari-gold bg-clip-text text-transparent">
               {data.title}

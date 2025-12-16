@@ -175,7 +175,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
   );
 
   return (
-    <section id="how-it-works" className="py-24 bg-bari-cream overflow-hidden">
+    <section id="how-it-works" className="py-20 bg-bari-cream overflow-hidden">
       <Container>
         <div className="max-w-6xl mx-auto" ref={containerRef}>
           <div className="text-center mb-24 relative z-10">
@@ -269,12 +269,12 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
 
           {/* SECTION 2: POLITIQUES (Policies) */}
           {policySteps.length > 0 && (
-            <div className="mt-12 bg-bari-white rounded-3xl p-8 md:p-12 border border-white/60 shadow-xl policy-container">
+            <div className="mt-12 bg-bari-white rounded-3xl p-8 md:p-8 md:w-full border border-white/60 shadow-xl policy-container">
               <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-darkgreen drop-shadow-lg text-center mb-10">
                 Lo que tenés que saber antes de sumarte
               </h3>
 
-              <div className="policies-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="policies-grid grid grid-cols-1 md:grid-cols-4 gap-8">
                 {policySteps.map((step, index) => {
                   const Icon = POLICY_ICONS[index % POLICY_ICONS.length];
                   return (

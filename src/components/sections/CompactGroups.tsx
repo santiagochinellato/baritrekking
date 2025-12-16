@@ -103,7 +103,7 @@ const CompactGroups = () => {
   };
 
   return (
-    <section id="groups" className="py-24 bg-bari-cream">
+    <section id="groups" className="py-20 bg-bari-cream">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -93,7 +93,7 @@ export const ManifestoValues = ({ values }: ManifestoValuesProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="flex md:grid md:grid-cols-2 gap-4 md:gap-8 mb-24 overflow-x-auto snap-x snap-mandatory pb-6 pr-4 [&::-webkit-scrollbar]:hidden"
+      className="flex md:grid md:grid-cols-2 gap-4 md:gap-8  overflow-x-auto snap-x snap-mandatory pb-6 pr-4 [&::-webkit-scrollbar]:hidden"
       style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
     >
       {values.map((value, index) => {

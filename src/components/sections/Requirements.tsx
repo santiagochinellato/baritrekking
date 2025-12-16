@@ -42,7 +42,7 @@ const Requirements = () => {
   return (
     <section
       id="requisitos"
-      className="py-24 bg-white relative overflow-hidden scroll-mt-32"
+      className="py-20 bg-white relative overflow-hidden scroll-mt-32"
     >
       {/* Background decorative - maybe distinct from Manifesto */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-5">

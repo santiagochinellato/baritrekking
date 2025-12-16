@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Users } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { Container } from "../layout/Container";
 import { useSanity } from "../../hooks/useSanity";
 import { urlFor } from "../../lib/sanity";
@@ -127,12 +127,12 @@ export const SocialWall = () => {
   }, [isPaused, items.length]);
 
   if (loading) {
-    return <div className="py-24 text-center">Cargando comunidad...</div>;
+    return <div className="py-20 text-center">Cargando comunidad...</div>;
   }
 
   if (error) {
     return (
-      <div className="py-24 text-center text-red-500">
+      <div className="py-20 text-center text-red-500">
         <p>Error al cargar Social Wall:</p>
         <pre className="text-xs mt-2">{JSON.stringify(error, null, 2)}</pre>
         <p className="text-sm mt-4 text-gray-500">
@@ -144,19 +144,19 @@ export const SocialWall = () => {
 
   if (!socialData && !items.length) {
     return (
-      <div className="py-24 text-center">
+      <div className="py-20 text-center">
         No se encontraron datos en Sanity.
       </div>
     );
   }
 
   if (socialData && !items.length) {
-    return <div className="py-24 text-center">No hay posts para mostrar.</div>;
+    return <div className="py-20 text-center">No hay posts para mostrar.</div>;
   }
 
   return (
     <section
-      className="py-24 bg-gradient-to-b from-white to-bari-cream"
+      className="py-20 bg-gradient-to-b from-white to-bari-cream"
       id="social-wall"
     >
       <Container>
@@ -167,10 +167,10 @@ export const SocialWall = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-bari-teal/10 text-bari-teal px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          {/* <div className="inline-flex items-center gap-2 bg-bari-teal/10 text-bari-teal px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <Users className="w-4 h-4" />
             <span>Comunidad Activa</span>
-          </div>
+          </div> */}
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark mb-4">
             {title}
           </h2>

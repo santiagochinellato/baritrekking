@@ -23,9 +23,9 @@ const CommunityCTA = () => {
   const buttonLink = ctaData?.buttonLink || "#";
 
   return (
-    <section className="py-24 bg-bari-darkgreen text-white relative overflow-hidden">
+    <section className="py-20 bg-bari-darkgreen text-white relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-bari-darkgreen/20 rounded-full blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/ 2 -translate-y-1/2 w-[500px] h-[500px] bg-bari-darkgreen/20 rounded-full blur-[100px]" />
 
       <Container className="relative z-10 text-center">
         <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
