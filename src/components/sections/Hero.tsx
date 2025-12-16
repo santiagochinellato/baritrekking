@@ -92,7 +92,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
           variants={containerVariants}
           initial="hidden"
           animate={isLoading ? "hidden" : "visible"}
-          className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center mb-20 lg:mb-0"
+          className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center mb-16 lg:mb-0"
         >
           <motion.div
             variants={itemVariants}
@@ -126,7 +126,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
             <Button
-              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden mt-2"
+              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden mt-6"
               onClick={() => (window.location.href = "#manifesto")}
             >
               <p className="text-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
