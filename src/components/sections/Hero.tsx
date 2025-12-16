@@ -125,7 +125,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.p
             variants={itemVariants}
-            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-lg md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed"
+            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-[18px] md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed text-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
           >
             {subtitle}
           </motion.p>
