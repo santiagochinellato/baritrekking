@@ -107,18 +107,12 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.h1
             variants={titleWrapperVariants}
-            className=" md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full flex flex-col items-center uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] gap-2"
+            className=" md:text-6xl text-[32px] font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full flex flex-col items-center uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] gap-2"
           >
-            <motion.span
-              variants={itemVariants}
-              className="text-bari-gold text-[32px]"
-            >
+            <motion.span variants={itemVariants} className="text-bari-gold ">
               {title1}
             </motion.span>
-            <motion.span
-              variants={itemVariants}
-              className="text-bari-white text-[32px]"
-            >
+            <motion.span variants={itemVariants} className="text-bari-white ">
               {title2}
             </motion.span>
           </motion.h1>
