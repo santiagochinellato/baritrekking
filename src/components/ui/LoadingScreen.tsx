@@ -15,21 +15,14 @@ export const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#25424C]"
     >
       <div className="relative flex flex-col items-center gap-6">
-        {/* Spinner Video */}
+        {/* Spinner */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="w-24 h-24 md:w-32 md:h-32"
         >
-          <video
-            src="/spinner.webm"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-contain"
-          />
+          <div className="w-full h-full border-4 border-white/20 border-t-white rounded-full animate-spin" />
         </motion.div>
 
         {/* Loading Text */}
