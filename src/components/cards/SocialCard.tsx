@@ -36,10 +36,23 @@ export const SocialCard = ({ data }: SocialCardProps) => {
         <div className="relative z-10 h-full flex flex-col p-6 md:p-8">
           <CardHeader className="p-0 pb-4 flex justify-between">
             <div className="flex flex-col sm:flex-row md:justify-between justify-center  items-center lg:items-start mb-3 gap-3">
-              <div className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2">
+              <motion.div
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  repeatType: "reverse",
+                }}
+                style={{
+                  WebkitFontSmoothing: "antialiased",
+                  backfaceVisibility: "hidden",
+                }}
+                className="bg-bari-gold text-bari-dark px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg inline-flex items-center gap-1.5 sm:gap-2"
+              >
                 <span className="text-base sm:text-lg">🚀</span>
                 <span>{data.badge}</span>
-              </div>
+              </motion.div>
               <Compass className="text-white/60 hidden md:block" size={40} />
             </div>
             <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 text-center md:text-left bg-gradient-to-r from-bari-gold via-amber-300 to-bari-gold bg-clip-text text-transparent">
