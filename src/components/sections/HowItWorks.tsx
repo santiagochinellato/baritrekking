@@ -175,7 +175,10 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
   );
 
   return (
-    <section id="sendero" className="py-20 bg-bari-cream overflow-hidden">
+    <section
+      id="sendero"
+      className="py-20 bg-bari-cream overflow-hidden scroll-mt-24"
+    >
       <Container>
         <div className="max-w-6xl mx-auto" ref={containerRef}>
           <div className="text-center mb-24 relative z-10">

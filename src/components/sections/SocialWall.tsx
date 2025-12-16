@@ -156,7 +156,7 @@ export const SocialWall = () => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-b from-white to-bari-cream"
+      className="py-20 bg-gradient-to-b from-white to-bari-cream scroll-mt-24"
       id="social-wall"
     >
       <Container>

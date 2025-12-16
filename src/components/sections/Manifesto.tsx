@@ -74,7 +74,7 @@ const Manifesto = () => {
   return (
     <section
       id="manifesto"
-      className="py-12 md:py-20 bg-white relative overflow-hidden"
+      className="py-12 md:py-20 bg-white relative overflow-hidden scroll-mt-24"
     >
       {/* Topographic Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">

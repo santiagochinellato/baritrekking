@@ -107,7 +107,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.h1
             variants={titleWrapperVariants}
-            className="text-[26px] md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full flex flex-col items-center uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+            className="text-[29px] md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-2xl leading-tight w-full flex flex-col items-center uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
           >
             <motion.span variants={itemVariants} className="text-bari-orange">
               {title1}
@@ -119,17 +119,20 @@ const Hero = ({ isLoading = false }: HeroProps) => {
 
           <motion.p
             variants={itemVariants}
-            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-lg md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed"
+            className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-[22px] md:text-2xl text-white/90 max-w-2xl mx-auto font-heading font-medium leading-relaxed"
           >
             {subtitle}
           </motion.p>
 
           <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
             <Button
-              className="bg-bari-orange hover:bg-bari-orange/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden"
+              className="bg-bari-gold hover:bg-bari-gold/90 text-white font-bold text-lg px-8 py-4 rounded-full w- md:w-auto min-h-[48px] shadow-lg lg:hidden "
               onClick={() => (window.location.href = "#groups")}
             >
-              Sumate si vivís acá
+              <p className="drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">
+                {" "}
+                Sumate si vivís acá
+              </p>
             </Button>
           </motion.div>
         </motion.div>

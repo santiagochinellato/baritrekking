@@ -68,9 +68,9 @@ const Navbar = () => {
 
   const navLinks = navbarData?.links || [
     { name: "Inicio", href: "#hero" },
-    { name: "Requisitos", href: "#requirements" },
+    { name: "Requisitos", href: "#requisitos" },
     { name: "Espacios", href: "#groups" },
-    { name: "¿Cómo funciona?", href: "#how-it-works" },
+    { name: "¿Cómo funciona?", href: "#sendero" },
   ];
 
   const logoSrc = navbarData?.logo

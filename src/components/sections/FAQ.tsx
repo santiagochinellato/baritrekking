@@ -102,7 +102,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="FAQ" className="py-20 bg-white">
+    <section id="FAQ" className="py-20 bg-white scroll-mt-24">
       <Container className="max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
