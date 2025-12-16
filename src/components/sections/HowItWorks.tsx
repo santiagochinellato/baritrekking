@@ -274,7 +274,7 @@ const HowItWorks = ({ steps = stepsList }: HowItWorksProps) => {
                 Lo que tenés que saber antes de sumarte
               </h3>
 
-              <div className="policies-grid grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="policies-grid grid grid-cols-1 lg:grid-cols-4 gap-8">
                 {policySteps.map((step, index) => {
                   const Icon = POLICY_ICONS[index % POLICY_ICONS.length];
                   return (
