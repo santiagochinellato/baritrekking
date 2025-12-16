@@ -130,7 +130,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
               onClick={() => (window.location.href = "#manifesto")}
             >
               <p className="text-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
-                Conocé más
+                Conocé más...
               </p>
             </Button>
           </motion.div>
