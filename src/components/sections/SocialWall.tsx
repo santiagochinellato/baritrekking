@@ -174,7 +174,7 @@ export const SocialWall = () => {
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-bari-dark mb-4">
             {title}
           </h2>
-          <p className="text-bari-slate text-lg max-w-2xl mx-auto">
+          <p className="text-bari-slate text-lg max-w-3xl mx-auto">
             {subtitle}
           </p>
         </motion.div>

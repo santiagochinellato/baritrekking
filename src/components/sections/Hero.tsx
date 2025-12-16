@@ -92,7 +92,7 @@ const Hero = ({ isLoading = false }: HeroProps) => {
           variants={containerVariants}
           initial="hidden"
           animate={isLoading ? "hidden" : "visible"}
-          className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center mb-20"
+          className="space-y-4 md:space-y-8  mx-auto flex flex-col items-center mb-20 lg:mb-0"
         >
           <motion.div
             variants={itemVariants}
