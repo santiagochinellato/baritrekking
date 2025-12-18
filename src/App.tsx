@@ -70,7 +70,6 @@ function App() {
           <Hero isLoading={isLoading} />
           <Manifesto />
           <Requirements />
-          <HowItWorks />
           <CompactGroups />
           <SocialWall />
           <CommunityCTA />

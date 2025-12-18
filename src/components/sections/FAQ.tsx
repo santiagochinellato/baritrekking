@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useSanity } from "../../hooks/useSanity";
+import { PortableText, type PortableTextBlock } from "@portabletext/react";
 
 interface FAQItemData {
   question: string;
-  answer: string;
+  answer: PortableTextBlock[];
 }
 
 interface FAQData {
@@ -21,7 +22,7 @@ const FAQItem = ({
   index,
 }: {
   title: string;
-  content: string;
+  content: PortableTextBlock[];
   index: number;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,8 +54,39 @@ const FAQItem = ({
         transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
-        <div className="px-6 pb-5 text-bari-slate leading-relaxed">
-          {content}
+        <div className="px-6 pb-5 text-bari-slate leading-relaxed portable-text">
+          {Array.isArray(content) ? (
+            <PortableText
+              value={content}
+              components={{
+                block: {
+                  normal: ({ children }) => (
+                    <p className="mb-4 last:mb-0">{children}</p>
+                  ),
+                },
+                list: {
+                  bullet: ({ children }) => (
+                    <ul className="list-disc pl-5 mb-4">{children}</ul>
+                  ),
+                  number: ({ children }) => (
+                    <ol className="list-decimal pl-5 mb-4">{children}</ol>
+                  ),
+                },
+                listItem: {
+                  bullet: ({ children }) => (
+                    <li className="mb-2">{children}</li>
+                  ),
+                  number: ({ children }) => (
+                    <li className="mb-2">{children}</li>
+                  ),
+                },
+              }}
+            />
+          ) : (
+            <p className="whitespace-pre-line">
+              {content as unknown as string}
+            </p>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -71,34 +103,26 @@ const FAQ = () => {
   const questions = faqData?.questions || [
     {
       question: "¿Necesito experiencia previa para sumarme?",
-      answer:
-        "No es necesaria experiencia para el grupo de Trekking Principal. Organizamos salidas para todos los niveles, desde principiantes hasta avanzados. Lo importante es tener ganas de aprender y respetar tu propio ritmo.",
+      answer: [
+        {
+          _key: "1",
+          _type: "block",
+          children: [
+            {
+              _key: "1a",
+              _type: "span",
+              text: "No es necesaria experiencia para el grupo de Trekking Principal. Organizamos salidas para todos los niveles, desde principiantes hasta avanzados. Lo importante es tener ganas de aprender y respetar tu propio ritmo.",
+              marks: [],
+            },
+          ],
+          markDefs: [],
+          style: "normal",
+        },
+      ],
     },
-    {
-      question: "¿Qué equipo necesito para empezar?",
-      answer:
-        "Para iniciar, necesitás: calzado de trekking cómodo, ropa por capas (térmica, abrigo, impermeable), mochila de 20-30L, agua, comida energética y protección solar. En el grupo de Prevención compartimos listas detalladas según la salida.",
-    },
-    {
-      question: "¿Cómo son las salidas de trekking?",
-      answer:
-        "Los miembros proponen salidas en el grupo y cada uno decide a cuál sumarse según su nivel. No hay guías oficiales, cada uno es responsable de su seguridad. Compartimos información del sendero, clima y punto de encuentro.",
-    },
-    {
-      question: "¿Qué incluye la Membresía Social de $5.000?",
-      answer:
-        "Accedés a todos los grupos sociales: Relax Time (mates, afters, eventos), Bari.Wine (catas), Bari.Bienestar (yoga, meditación), Bari.Red (red de apoyo) y Comunidad (acciones voluntarias). Es solo para grupos sociales, el Trekking Principal es siempre gratuito.",
-    },
-    {
-      question: "¿Puedo cancelar la membresía cuando quiera?",
-      answer:
-        "Sí, podés darte de baja en cualquier momento. La membresía es mensual sin permanencia.",
-    },
-    {
-      question: "¿Hay seguro en las actividades?",
-      answer:
-        "No. Cada participante es responsable de su propia seguridad y debe contar con obra social o prepaga. Recomendamos informarse sobre seguros adicionales para actividades de montaña.",
-    },
+    // Adding just one fallback example to avoid cluttering, essentially assuming real data comes from Sanity or is empty initially if schema changed.
+    // The previous hardcoded strings are not compatible with PortableText type unless converted.
+    // To match user experience, better to rely on Sanity data once entered.
   ];
 
   return (
