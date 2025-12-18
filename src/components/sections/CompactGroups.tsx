@@ -3,6 +3,22 @@ import { motion } from "framer-motion";
 import { useSanity } from "../../hooks/useSanity";
 import { TrekkingCard } from "../cards/TrekkingCard";
 import { SocialCard } from "../cards/SocialCard";
+import { ShieldCheck, Leaf, UserCheck, Info } from "lucide-react";
+
+const POLICY_ICONS = [UserCheck, Leaf, ShieldCheck, Info];
+
+const stepsList = [
+  "Te sumás a los grupos en los que quieras participar.",
+  "Los miembros publican salidas y actividades: trekking, caminatas, mates, catas de vinos, encuentros y propuestas sociales.",
+  "Vos elegís libremente a qué sumarte o incluso podés proponer tu propia actividad.",
+  "Moderamos los grupos para que estén ordenados y no sean un caos de mensajes.",
+  "Cuidamos el ambiente del grupo: si alguien no respeta normas o valores, puede ser removido.",
+  "Cada persona es responsable de sí misma: su nivel, su seguridad y su preparación. No hay guías oficiales.",
+];
+
+interface HowItWorksData {
+  policies?: string[];
+}
 
 interface StatItem {
   label: string;
@@ -52,6 +68,11 @@ interface GroupsData {
 
 const CompactGroups = () => {
   const { data: groupsData } = useSanity<GroupsData>(`*[_type == "groups"][0]`);
+  const { data: howItWorksData } = useSanity<HowItWorksData>(
+    '*[_type == "howItWorks"][0]'
+  );
+
+  const policySteps = howItWorksData?.policies || stepsList.slice(6);
 
   // Defaults
   const title = groupsData?.title || "Nuestros Espacios";
@@ -124,6 +145,87 @@ const CompactGroups = () => {
           <TrekkingCard data={{ ...trekking, prevention }} />
           <SocialCard data={social} />
         </div>
+
+        {policySteps.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              boxShadow: [
+                "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+                "0px 0px 35px 5px rgba(224, 122, 95, 0.2)",
+              ],
+            }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              boxShadow: {
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              },
+            }}
+            className="mt-12 bg-bari-white rounded-3xl p-8 md:p-8 md:w-full border border-white/60 shadow-xl policy-container"
+          >
+            <h3 className="text-2xl md:text-3xl font-heading font-bold text-bari-darkgreen drop-shadow-lg text-center mb-10">
+              Lo que tenés que saber antes de sumarte
+            </h3>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15,
+                  },
+                },
+              }}
+              className="policies-grid grid grid-cols-1 lg:grid-cols-4 gap-8"
+            >
+              {policySteps.map((step, index) => {
+                const Icon = POLICY_ICONS[index % POLICY_ICONS.length];
+                return (
+                  <motion.div
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.5 },
+                      },
+                    }}
+                    className="policy-card flex flex-col items-center text-center space-y-4 group p-6 rounded-2xl bg-white/40 hover:bg-white  hover:shadow-xl hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-300 "
+                  >
+                    <div className="policy-icon-anim">
+                      <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.5, // Stagger the pulse slightly
+                        }}
+                        className="w-16 h-16 rounded-2xl bg-bari-orange text-bari-white flex items-center justify-center group-hover:scale-110 group-hover:bg-bari-orange group-hover:text-white transition-transform duration-300 shadow-sm group-hover:shadow-md"
+                      >
+                        <Icon size={32} />
+                      </motion.div>
+                    </div>
+                    <p className="text-bari-darkgreen font-bold leading-relaxed drop-shadow-sm">
+                      {step}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </motion.div>
+        )}
       </Container>
     </section>
   );
