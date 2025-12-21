@@ -50,9 +50,6 @@ const SocialCard = ({ item, index }: { item: SocialItem; index: number }) => {
         />
       </div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center flex-shrink-0">

@@ -15,7 +15,8 @@ const SEO = ({
   image,
   canonicalUrl,
 }: SEOProps) => {
-  const defaultTitle = "Bari.Trekking | Comunidad de Montaña en Bariloche";
+  const defaultTitle =
+    "Bari.Trekking | Comunidad de Trekking y Social en Bariloche";
   const defaultDescription =
     "Únete a Bari.Trekking, la comunidad de entusiastas del trekking en Bariloche, Argentina. Descubre senderos, comparte experiencias y conecta con la naturaleza en la Patagonia.";
   const defaultKeywords = [
