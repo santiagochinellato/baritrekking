@@ -16,7 +16,7 @@ export interface TrekkingCardProps {
     description: string;
     badge: string;
     image: unknown;
-    levels: string[];
+    // levels: string[];
     stats: StatItem[];
     buttonText?: string;
     buttonLink?: string;
@@ -80,7 +80,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
 
           <CardContent className="p-0 space-y-6 flex-grow flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4 justify-center lg:justify-start">
+              {/* <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4 justify-center lg:justify-start">
                 {data.levels.map((level, i) => (
                   <span
                     key={i}
@@ -89,9 +89,39 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                     {level}
                   </span>
                 ))}
-              </div>
+              </div> */}
             </div>
 
+            {/* Prevention Section */}
+            {data.prevention && (
+              <div className="bg-white/10 rounded-xl p-4 border border-white/10 mb-4">
+                <h4 className="font-bold text-bari-gold mb-1 flex items-center gap-2">
+                  🛡️ {data.prevention.title}
+                </h4>
+                <p className="text-xs text-white/80 leading-relaxed mb-2">
+                  {data.prevention.description}
+                </p>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-white/60">
+                  {data.prevention.tagline}
+                </div>
+              </div>
+            )}
+            {/* {data.prevention && ( */}
+            <div className="bg-white/10 rounded-xl p-4 border border-white/10 mb-4">
+              <h4 className="font-bold text-bari-gold mb-1 flex items-center gap-2">
+                ⭐ Bari.Senior (próximamente)
+              </h4>
+              <p className="text-xs text-white/80 leading-relaxed mb-2">
+                Un espacio pensado para adultos mayores, donde puedan
+                encontrarse para realizar caminatas suaves, actividades
+                recreativas y encuentros sociales, donde el ritmo, el cuidado y
+                el disfrute compartido son protagonistas.
+              </p>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white/60">
+                UN ESPACIO PARA EL RITMO DE LA VIDA
+              </div>
+            </div>
+            {/* )} */}
             <div className="pt-4 w-full flex-grow">
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-3 mb-6">
@@ -105,21 +135,6 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                   </div>
                 ))}
               </div>
-
-              {/* Prevention Section */}
-              {data.prevention && (
-                <div className="bg-white/10 rounded-xl p-4 border border-white/10 mb-4">
-                  <h4 className="font-bold text-bari-gold mb-1 flex items-center gap-2">
-                    🛡️ {data.prevention.title}
-                  </h4>
-                  <p className="text-xs text-white/80 leading-relaxed mb-2">
-                    {data.prevention.description}
-                  </p>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-white/60">
-                    {data.prevention.tagline}
-                  </div>
-                </div>
-              )}
             </div>
 
             <Button
