@@ -121,5 +121,17 @@ export const groups = defineType({
         defineField({ name: 'tagline', title: 'Frase final', type: 'string' }),
       ],
     }),
+
+    // Bari Senior Card
+    defineField({
+      name: 'bariSeniorCard',
+      title: 'Tarjeta Bari Senior',
+      type: 'object',
+      fields: [
+        defineField({ name: 'title', title: 'Título', type: 'string' }),
+        defineField({ name: 'description', title: 'Descripción', type: 'text', rows: 3 }),
+        defineField({ name: 'tagline', title: 'Frase final', type: 'string' }),
+      ],
+    }),
   ],
 })

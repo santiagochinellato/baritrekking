@@ -64,6 +64,11 @@ interface GroupsData {
     description: string;
     tagline: string;
   };
+  bariSeniorCard: {
+    title: string;
+    description: string;
+    tagline: string;
+  };
 }
 
 const CompactGroups = () => {
@@ -123,6 +128,9 @@ const CompactGroups = () => {
     tagline: "Tu seguridad es prioridad",
   };
 
+  // Bari Senior Card Defaults
+  const bariSenior = groupsData?.bariSeniorCard;
+
   return (
     <section id="groups" className="py-20 bg-bari-cream scroll-mt-24">
       <Container>
@@ -142,7 +150,7 @@ const CompactGroups = () => {
 
         {/* Compact Bento Grid - 2 Cols */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-[minmax(200px,auto)]">
-          <TrekkingCard data={{ ...trekking, prevention }} />
+          <TrekkingCard data={{ ...trekking, prevention, bariSenior }} />
           <SocialCard data={social} />
         </div>
 
