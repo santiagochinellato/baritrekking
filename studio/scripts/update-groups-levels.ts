@@ -20,7 +20,7 @@ async function updateLevels() {
   try {
     const res = await client
       .patch(doc._id)
-      .setIfMissing({ 'trekkingCard.levels': levels }) 
+      .set({ 'trekkingCard.levels': levels }) 
       .commit()
     
     console.log('Update successful:', res)
