@@ -112,7 +112,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
               </div>
             )}
             {/* Bari Senior Section */}
-            {data.bariSenior && (
+            {/* {data.bariSenior && (
               <div className="bg-white/10 rounded-xl p-4 border border-white/10 mb-4">
                 <h4 className="font-bold text-bari-gold mb-1 flex items-center gap-2">
                   {data.bariSenior.title}
@@ -124,7 +124,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                   {data.bariSenior.tagline}
                 </div>
               </div>
-            )}
+            )} */}
             <div className="pt-4 w-full flex-grow">
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-3 mb-6">
