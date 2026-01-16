@@ -16,7 +16,7 @@ export interface TrekkingCardProps {
     description: string;
     badge: string;
     image: unknown;
-    // levels: string[];
+    levels: string[];
     stats: StatItem[];
     buttonText?: string;
     buttonLink?: string;
@@ -85,7 +85,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
 
           <CardContent className="p-0 space-y-6 flex-grow flex flex-col justify-between">
             <div className="space-y-4">
-              {/* <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4 justify-center lg:justify-start">
+              <div className="flex gap-2 flex-wrap border-b border-white/20 pb-4 justify-center lg:justify-start">
                 {data.levels.map((level, i) => (
                   <span
                     key={i}
@@ -94,7 +94,7 @@ export const TrekkingCard = ({ data }: TrekkingCardProps) => {
                     {level}
                   </span>
                 ))}
-              </div> */}
+              </div>
             </div>
 
             {/* Prevention Section */}

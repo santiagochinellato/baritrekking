@@ -7,7 +7,7 @@ import { PortableText, type PortableTextBlock } from "@portabletext/react";
 
 interface FAQItemData {
   question: string;
-  answer: PortableTextBlock[];
+  answer: PortableTextBlock[] | string;
 }
 
 interface FAQData {
@@ -22,7 +22,7 @@ const FAQItem = ({
   index,
 }: {
   title: string;
-  content: PortableTextBlock[];
+  content: PortableTextBlock[] | string;
   index: number;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,9 +83,7 @@ const FAQItem = ({
               }}
             />
           ) : (
-            <p className="whitespace-pre-line">
-              {content as unknown as string}
-            </p>
+            <p className="whitespace-pre-line">{content as string}</p>
           )}
         </div>
       </motion.div>

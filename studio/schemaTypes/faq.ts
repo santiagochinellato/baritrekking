@@ -16,12 +16,7 @@ export const faq = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'question', title: 'Pregunta', type: 'string' }),
-            defineField({ 
-              name: 'answer', 
-              title: 'Respuesta', 
-              type: 'array',
-              of: [{ type: 'block' }]
-            }),
+            defineField({ name: 'answer', title: 'Respuesta', type: 'text', rows: 4 }),
           ],
         },
       ],

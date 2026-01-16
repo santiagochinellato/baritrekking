@@ -40,7 +40,7 @@ interface GroupsData {
     description: string;
     badge: string;
     image: unknown;
-    // levels: string[];
+    levels: string[];
     stats: StatItem[];
     buttonText?: string;
     buttonLink?: string;
@@ -92,7 +92,7 @@ const CompactGroups = () => {
       "El corazón de Bari.Trekking. Organizamos salidas todo el año para todos los niveles. Descubrí senderos, conocé gente nueva y disfrutá de la montaña.",
     badge: "Acceso Libre / Gratuito",
     image: null,
-    // levels: ["🥾 Principiantes", "⛰️ Intermedios", "🏔️ Avanzados"],
+    levels: ["🥾 Principiantes", "⛰️ Intermedios", "🏔️ Avanzados"],
     stats: [
       { label: "Salidas", value: "200+", icon: "Mountain" },
       { label: "Miembros", value: "1034", icon: "Users" },

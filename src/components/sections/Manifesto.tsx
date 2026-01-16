@@ -112,7 +112,7 @@ const Manifesto = () => {
       </div>
 
       <Container>
-        <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
+        <div className="max-w-6xl mx-auto text-center mb-16 relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +129,7 @@ const Manifesto = () => {
             transition={{ delay: 0.2 }}
             className="inline-block"
           >
-            <span className="text-[18px] md:text-3xl font-heading font-bold bg-gradient-to-r from-bari-teal via-bari-darkgreen to-bari-teal bg-clip-text text-transparent hover:scale-105 transition-transform cursor-default block py-2">
+            <span className="text-[18px] md:text-2xl font-heading font-bold bg-gradient-to-r from-bari-teal via-bari-darkgreen to-bari-teal bg-clip-text text-transparent hover:scale-105 transition-transform cursor-default block py-2">
               {highlight}
             </span>
           </motion.div>
