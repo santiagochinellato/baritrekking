@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { client } from '../lib/sanity';
 
-export function useSanity<T>(query: string): { data: T | null; loading: boolean; error: any } {
+export function useSanity<T>(query: string): { data: T | null; loading: boolean; error: unknown } {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
     const fetchData = async () => {

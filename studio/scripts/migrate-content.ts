@@ -1,8 +1,8 @@
 
-import { createClient } from '@sanity/client'
-import fs from 'fs'
-import path from 'path'
-import { basename } from 'path'
+// import { createClient } from '@sanity/client'
+// import fs from 'fs'
+// import path from 'path'
+// import { basename } from 'path'
 
 // Client configuration - assumes running from studio folder or root with access to process.env or sanity.cli.ts context
 // But since this is a standalone script, we need to initialize a client.
