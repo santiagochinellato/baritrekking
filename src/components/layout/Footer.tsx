@@ -129,11 +129,9 @@ const Footer = () => {
     >
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4 flex flex-col items-start">
+          <div className="space-y-4 flex flex-col items-center ">
             <img src={logoSrc} alt="Bari.Trekking Logo" className="w-24" />
-            <p className="text-sm text-gray-300 text-center lg:text-left">
-              {description}
-            </p>
+            <p className="text-sm text-gray-300 text-center">{description}</p>
           </div>
 
           {linkColumns.map((col, idx) => (
