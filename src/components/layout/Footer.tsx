@@ -58,7 +58,7 @@ const Footer = () => {
     {
       title: "Legal",
       links: [
-        { text: "Términos y Condiciones", href: "#" },
+        { text: "Términos y Condiciones", href: "/terminos-y-condiciones/" },
         { text: "Política de Privacidad", href: "#" },
         { text: "Protocolo de Seguridad", href: "#" },
       ],

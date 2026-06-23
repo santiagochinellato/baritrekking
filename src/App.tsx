@@ -11,20 +11,62 @@ import { FloatingCTA } from "./components/ui/FloatingCTA";
 import { LoadingScreen } from "./components/ui/LoadingScreen";
 import { HelmetProvider } from "react-helmet-async";
 import { SEO } from "./components/seo/SEO";
+import { TermsPage } from "./pages/TermsPage";
 import { useEffect, useState } from "react";
 import { client, urlFor } from "./lib/sanity";
 import { AnimatePresence } from "framer-motion";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SITE_URL } from "./lib/seo";
 
 interface SEOSettings {
   title?: string;
   description?: string;
-  keywords?: string[];
   ogImage?: {
     asset: {
       _ref: string;
     };
   };
 }
+
+const HomePage = ({
+  seoSettings,
+  isLoading,
+}: {
+  seoSettings: SEOSettings | null;
+  isLoading: boolean;
+}) => {
+  const seoData = {
+    title: seoSettings?.title,
+    description: seoSettings?.description,
+    image: seoSettings?.ogImage ? urlFor(seoSettings.ogImage).url() : undefined,
+    canonicalUrl: `${SITE_URL}/`,
+  };
+
+  return (
+    <>
+      <SEO {...seoData} />
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen isLoading={isLoading} key="loading-screen" />
+        )}
+      </AnimatePresence>
+      <div className="min-h-screen bg-bari-cream flex flex-col font-sans">
+        <Navbar />
+        <main className="flex-grow">
+          <Hero isLoading={isLoading} />
+          <Manifesto />
+          <Requirements />
+          <CompactGroups />
+          <SocialWall />
+          <CommunityCTA />
+          <FAQ />
+        </main>
+        <Footer />
+        <FloatingCTA />
+      </div>
+    </>
+  );
+};
 
 function App() {
   const [seoSettings, setSeoSettings] = useState<SEOSettings | null>(null);
@@ -48,35 +90,20 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const seoData = {
-    title: seoSettings?.title,
-    description: seoSettings?.description,
-    keywords: seoSettings?.keywords,
-    image: seoSettings?.ogImage ? urlFor(seoSettings.ogImage).url() : undefined,
-  };
-
   return (
     <HelmetProvider>
-      <SEO {...seoData} />
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <LoadingScreen isLoading={isLoading} key="loading-screen" />
-        )}
-      </AnimatePresence>
-      <div className="min-h-screen bg-bari-cream flex flex-col font-sans">
-        <Navbar />
-        <main className="flex-grow">
-          <Hero isLoading={isLoading} />
-          <Manifesto />
-          <Requirements />
-          <CompactGroups />
-          <SocialWall />
-          <CommunityCTA />
-          <FAQ />
-        </main>
-        <Footer />
-        <FloatingCTA />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage seoSettings={seoSettings} isLoading={isLoading} />
+            }
+          />
+          <Route path="/terminos-y-condiciones" element={<TermsPage />} />
+          <Route path="/terminos-y-condiciones/" element={<TermsPage />} />
+        </Routes>
+      </BrowserRouter>
     </HelmetProvider>
   );
 }

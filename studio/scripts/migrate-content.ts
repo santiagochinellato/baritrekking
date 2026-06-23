@@ -97,7 +97,7 @@ async function migrate() {
           _key: 'col2',
           title: "Legal",
           links: [
-            { _key: 'l5', text: "Términos y Condiciones", href: "#" },
+            { _key: 'l5', text: "Términos y Condiciones", href: "/terminos-y-condiciones/" },
             { _key: 'l6', text: "Política de Privacidad", href: "#" },
             { _key: 'l7', text: "Protocolo de Seguridad", href: "#" },
           ]
